@@ -1,0 +1,5 @@
+langchain-community==0.2.19
+ragas==0.1.21
+datasets==2.19.0
+huggingface-hub<1.0,>=0.19.3
+deepeval>=1.0.0

@@ -1,0 +1,101 @@
+# Tiki hiện đang hỗ trợ các phương thức thanh toán nào
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/970
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Đặt hàng và Thanh toán / Thanh Toán Tại Tiki
+ Tiki hiện đang hỗ trợ các phương thức thanh toán nào
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 721
+
+Tiki hiện có các phương thức thanh toán sau:
+ 
+
+1. Thanh toán tiền mặt khi nhận hàng (COD):
+
+Nhận hàng và thanh toán trực tiếp với nhân viên giao hàng (Chỉ áp dụng cho đơn hàng có tổng trị giá từ 20.000.000đ trở xuống trừ sản phẩm xe máy).
+ 
+
+2. Thanh toán qua thẻ ATM có đăng ký thanh toán trực tuyến (miễn phí thanh toán)
+
+Để sử dụng phương thức thanh toán này, tài khoản ngân hàng của quý khách cần đăng ký dịch vụ Internet Banking với ngân hàng. Tiki hiện hỗ trợ thanh toán cho phần lớn các ngân hàng tại Việt Nam.
+ 
+
+
+3. Thanh toán qua thẻ Visa/Master/JCB:
+
+Phí thanh toán tùy thuộc vào từng loại thẻ quý khách dùng và ngân hàng phát hành thẻ. Vui lòng liên hệ với ngân hàng phát hành thẻ để biết rõ phí thanh toán phát sinh. 
+
+⚠Lưu ý: Từ tháng 01/2017 Tiki không hỗ trợ thanh toán qua thẻ phát hành tại ngân hàng nước ngoài. Với các đơn hàng được đặt và thanh toán thành công bởi thẻ này, Tiki rất tiếc sẽ tiến hành hủy đơn hàng và hoàn tiền vào tài khoản quý khách đã thanh toán.
+
+
+4. Thanh toán qua ví MoMo: 
+
+Quý khách cần tải ứng dụng MoMo về điện thoại, liên kết với ngân hàng và nạp tiền vào ví MoMo sau đó đặt hàng trên Tiki và chọn vào phương thức thanh toán bằng Ví MoMo như hình bên dưới. Chi tiết quý khách vui lòng tham khảo tại đây.
+
+  
+
+
+5. Thanh toán qua ZaloPay: 
+
+Quý khách cần tải ứng dụng ZaloPay về điện thoại, liên kết với ngân hàng sau đó đặt hàng trên Tiki và chọn vào phương thức thanh toán bằng ZaloPay như hình bên dưới. Chi tiết quý khách vui lòng tham khảo tại đây.
+
+  
+
+ 
+
+6. Thanh toán qua VNPAY: 
+
+Quý khách cần tải ứng dụng VNPAY về điện thoại, dùng ứng dụng ngân hàng có hỗ trợ VNPAY và quét mã thanh toán. Chi tiết quý khách vui lòng tham khảo tại đây.
+
+ 
+
+7. Thanh toán qua Ví Viettel Money: 
+
+Quý khách cần tải ứng dụng Viettel Money về điện thoại, liên kết với ngân hàng sau đó đặt hàng trên Tiki và chọn vào phương thức thanh toán bằng Viettel Money như hình bên dưới. Chi tiết quý khách vui lòng tham khảo tại đây.
+
+  
+
+
+8. Thanh toán qua Apple Pay: 
+
+Phương thức này chỉ hỗ trợ trên điện thoại, quý khách cần liên kết và thiết lập ví Apple Pay trên thiết bị di động (Apple). Quý khách có thể tham khảo chi tiết cách thêm thẻ ngân hàng vào trong ví Apple Pay tại đây.
+ 
+
+
+
+⚠️Lưu ý: Ngoài các phương thức thanh toán trên, quý khách có thể tham khảo thêm các hình thức bên dưới:
+
+- Thanh toán trả góp qua thẻ tín dụng lãi suất 0%, xem thêm tại đây.
+- Đăng ký tài khoản trải nghiệm thanh toán "Mua trước trả sau" với nhiều ưu đãi, tham khảo tại đây.
+- Thanh toán áp dụng đồng thời các chương trình khuyến mãi và thanh toán bằng Tiki Xu, xem hướng dẫn thêm tại đây.
+
+Đối với đơn hàng đã được thanh toán trước, nhân viên giao nhận có thể yêu cầu người nhận hàng cung cấp CMND/ giấy phép lái xe để chụp ảnh hoặc ghi lại thông tin.
+
+Đối với đơn hàng trên 2.000.000 đ, Tiki sẽ gửi mã OTP để quý khách xác nhận với nhân viên vận chuyển khi nhận hàng. 
+
+
+  
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.   
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

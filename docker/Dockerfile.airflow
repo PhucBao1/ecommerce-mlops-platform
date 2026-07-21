@@ -1,0 +1,32 @@
+# ĐỔI VỀ AIRFLOW 2.x
+FROM apache/airflow:2.9.1-python3.10
+
+# Chuyển sang quyền root để cài đặt các thư viện cấp hệ thống
+USER root
+
+# Cài đặt OpenJDK (Java) - Bắt buộc để Spark có thể chạy được
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+         openjdk-17-jre-headless \
+  && apt-get autoremove -yqq --purge \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+# Thiết lập biến môi trường JAVA_HOME
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+# Tạo docker group với GID khớp host (build arg)
+ARG DOCKER_GID=984
+RUN groupadd -g ${DOCKER_GID} docker || true \
+    && usermod -aG docker airflow
+
+# Trả lại quyền cho user airflow để cài đặt các gói Python an toàn
+USER airflow
+
+ENV PATH="/home/airflow/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# 🚀 Cài đặt Provider KÈM RÀNG BUỘC (Constraints) ĐỂ KHÔNG BỊ XÓA AIRFLOW
+RUN pip install --no-cache-dir "apache-airflow==2.9.1" \
+    apache-airflow-providers-apache-spark \
+    apache-airflow-providers-docker \
+    --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.1/constraints-3.10.txt"

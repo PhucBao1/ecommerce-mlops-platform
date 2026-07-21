@@ -1,0 +1,18 @@
+# Copy thành terraform.tfvars (đã gitignore, không commit) rồi điền giá trị thật.
+# Chạy SAU KHI Phase 1 đã terraform apply xong (Phase 2 đọc state Phase 1 qua
+# terraform_remote_state — xem main.tf).
+
+aws_region   = "ap-southeast-1"
+project_name = "ecommerce-mlops"
+
+my_ip         = "1.2.3.4/32"
+key_pair_name = "my-keypair-name"
+
+gpu_instance_type = "g4dn.xlarge"
+vllm_model        = "Qwen/Qwen2.5-7B-Instruct-AWQ"
+vllm_quantization = "awq" # set "" (chuỗi rỗng) nếu đổi sang model FP16 thường
+model_s3_prefix   = "models/qwen2.5-7b-instruct-awq"
+
+# Để trống (null) = dùng giá On-Demand làm trần mặc định. Set số nếu muốn giới
+# hạn cứng, vd "0.30" (USD/giờ) — nếu giá Spot vượt mức này, instance bị reclaim.
+# spot_max_price = "0.30"

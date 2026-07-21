@@ -1,0 +1,12 @@
+argparse==1.4.0
+great_expectations==1.16.1
+pandas>=2.0.3
+pyarrow>=12.0.0
+s3fs>=2023.11.0
+requests>=2.31.0
+tqdm>=4.65.0
+urllib3>=2.0.4
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.1.2+cpu
+transformers==4.41.0
+onnxruntime==1.20.1

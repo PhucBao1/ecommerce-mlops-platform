@@ -1,0 +1,32 @@
+# Dùng bản Python 3.10
+FROM python:3.10-slim
+
+# Cài đặt các thư viện hệ thống cần thiết để build driver Thrift/SASL
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    git \
+    gcc \
+    python3-dev \
+    openjdk-21-jre-headless \
+    libsasl2-dev \
+    libsasl2-modules \
+    curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Cài đặt dbt-spark với tùy chọn PyHive (bắt buộc để chạy method: thrift)
+RUN pip install --no-cache-dir "dbt-spark[PyHive]" thrift_sasl sasl
+
+# Copy thư mục chứa code dbt
+#COPY ./dbt_project /opt/workspace/dbt_project
+
+# Copy file kết nối vào cả 2 nơi cho chắc chắn:
+# 1. Thư mục mặc định của dbt (~/.dbt)
+# 2. Thư mục dự án (để dùng với --profiles-dir .)
+#RUN mkdir -p /root/.dbt
+#COPY ./dbt_project/.dbt/profiles.yml /root/.dbt/profiles.yml
+#COPY ./dbt_project/.dbt/profiles.yml /opt/workspace/dbt_project/profiles.yml
+COPY dbt_project /opt/workspace/dbt_project
+COPY ./dbt_project/.dbt/profiles.yml /root/.dbt/profiles.yml
+
+
+WORKDIR /opt/workspace/dbt_project

@@ -1,0 +1,101 @@
+# Cách tính phí vận chuyển
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/904
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Giao và Nhận hàng / Thời Gian Vận Chuyển Và Cước Phí
+ Cách tính phí vận chuyển
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 135
+
+1. Tiki tính phí vận chuyển như thế nào? 
+
+Phí vận chuyển tại Tiki được tính dựa theo:
+
+Khối lượng và kích thước đóng gói của các sản phẩm trong đơn hàng.
+Khoảng cách địa lý giữa địa chỉ nhận hàng và kho của Tiki hoặc kho của nhà cung cấp/ nhà bán hàng.
+
+
+2. Làm sao để tôi biết phí vận chuyển của đơn hàng là bao nhiêu?
+
+Sau khi quý khách hoàn tất giỏ hàng, đến bước "Thanh toán", hệ thống sẽ hiển thị phí vận chuyển theo từng sản phẩm và hình thức giao hàng quý khách chọn.
+
+
+⭕Giao diện Website
+ 
+
+
+
+
+⭕Giao diện App
+ 
+
+
+
+3. Trường hợp giỏ hàng của tôi bị tách thành nhiều đơn hàng thì phí vận chuyển được tính thế nào?
+ 
+
+Phí vận chuyển được tính trên từng sản phẩm nên trường hợp đơn hàng tách thành nhiều đơn hàng khác nhau thì phí vận chuyển sẽ được hiển thị theo từng đơn hàng để quý khách dễ theo dõi.
+
+
+
+
+
+
+
+4. Với các đơn hàng có trọng lượng lớn thì ngoài phí vận chuyển, tôi còn bị tính phụ phí hàng cồng kềnh không?
+
+Sẽ chỉ có một phí được thể hiện là phí vận chuyển. Quý khách có thể tham khảo phí vận chuyển cho mỗi sản phẩm của từng nhà bán tại trang sản phẩm (sau khi chọn địa chỉ giao hàng), hoặc có thể xem thông tin chính xác nhất tại bước Thanh toán & Đặt mua.
+
+
+5. Tổng giá trị đơn hàng đã bao gồm phí vận chuyển chưa?
+
+Tổng giá trị đơn hàng được xác nhận sau khi đặt hàng thành công đã bao gồm giá sản phẩm và phí vận chuyển (nếu có).
+
+
+6. Khi tôi mua nhiều sản phẩm cùng một hoặc nhiều nhà cung cấp/ nhà bán hàng khác nhau thì phí vận chuyển tính như thế nào?
+
+Phí vận chuyển đang được áp dụng cho từng sản phẩm trong đơn hàng. Nếu quý khách mua nhiều sản phẩm từ cùng hoặc nhiều nhà cung cấp/ nhà bán hàng khác nhau thì phí vận chuyển sẽ được tính theo chính sách và mức hỗ trợ riêng của từng nhà cung cấp/ nhà bán hàng.
+
+
+7. Có cách nào để tôi tiết kiệm được phí vận chuyển này không?
+
+Quý khách có thể áp dụng các coupon giảm giá phí vận chuyển từ Tiki, hoặc sử dụng thẻ Tiki Platinum để được hỗ trợ phần phí này.
+
+ 
+
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.     
+
+ 
+
+   
+
+ 
+
+ 
+
+ 
+
+ 1Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

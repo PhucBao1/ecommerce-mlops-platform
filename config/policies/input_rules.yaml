@@ -1,0 +1,81 @@
+# Input Policy Rules for Shopping Agent
+# Evaluated in order — first matching rule wins.
+# action: block | warn | allow
+# All regex patterns are Vietnamese-aware (re.IGNORECASE | re.UNICODE).
+
+version: "1.0"
+
+rules:
+  # ── PII Detection ─────────────────────────────────────────────────────────
+  - id: pii_phone
+    description: "Block messages containing Vietnamese phone numbers"
+    action: block
+    reason: pii_phone
+    patterns:
+      - "0[3-9]\\d{8}"        # 10-digit Vietnamese mobile
+      - "\\+84[3-9]\\d{8}"    # international format
+
+  - id: pii_email
+    description: "Block messages containing email addresses"
+    action: block
+    reason: pii_email
+    patterns:
+      - "[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}"
+
+  - id: pii_credit_card
+    description: "Block messages containing card numbers"
+    action: block
+    reason: pii_credit_card
+    patterns:
+      - "\\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13})\\b"
+
+  # ── Prompt Injection ──────────────────────────────────────────────────────
+  - id: prompt_injection
+    description: "Block prompt injection attempts"
+    action: block
+    reason: prompt_injection
+    keywords:
+      - "ignore previous instructions"
+      - "bỏ qua hướng dẫn"
+      - "system prompt"
+      - "you are now"
+      - "act as DAN"
+      - "forget you are"
+      - "\\\\n\\\\nHuman:"
+
+  # ── Hate / Harmful Content ────────────────────────────────────────────────
+  - id: harmful_content
+    description: "Block requests for harmful content"
+    action: block
+    reason: harmful_content
+    keywords:
+      - "tự tử"
+      - "chất nổ"
+      - "vũ khí"
+      - "hack"
+      - "bomb"
+      - "thuốc độc"
+
+  # ── Off-topic (non-shopping) ──────────────────────────────────────────────
+  - id: off_topic_politics
+    description: "Warn on political topics — redirect to shopping"
+    action: warn
+    reason: off_topic
+    keywords:
+      - "chính trị"
+      - "bầu cử"
+      - "đảng"
+      - "tổng thống"
+
+  # ── Spam / Flood ──────────────────────────────────────────────────────────
+  - id: too_short
+    description: "Block single-character or empty messages"
+    action: block
+    reason: too_short
+    min_length: 2
+
+  - id: too_long
+    description: "Block excessively long inputs (>2000 chars) to prevent abuse"
+    action: block
+    reason: too_long
+    max_length: 2000

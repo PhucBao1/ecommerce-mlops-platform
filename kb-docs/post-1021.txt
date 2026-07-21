@@ -1,0 +1,91 @@
+# Một số câu hỏi thường gặp về dịch vụ lắp đặt
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/1021
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Dịch vụ và Chương trình / Dịch Vụ Lắp Đặt
+ Một số câu hỏi thường gặp về dịch vụ lắp đặt
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 45
+
+
+
+
+1. Tôi muốn xuất hóa đơn VAT cho dịch vụ này được không?
+
+Tiki sẽ xuất hóa đơn VAT dựa trên sản phẩm và dịch vụ đã chọn nên hóa đơn VAT sẽ ghi rõ thông tin về phí thi công. Tuy nhiên, hóa đơn sẽ không hiển thị chi phí vật tư phát sinh vì phí này quý khách hàng sẽ tự thanh toán với nhân viên lắp đặt. Trong trường hợp cần xuất hóa đơn VAT cho các chi phí vật tư này, quý khách vui lòng thông báo với nhân viên lắp đặt trước khi chính thức thi công.
+
+ 
+
+2. Tôi đã có sản phẩm rồi, chỉ muốn mua dịch vụ lắp đặt này được không?
+
+Tiki rất tiếc vì dịch vụ này chỉ hỗ trợ mua kèm sản phẩm được bán tại Tiki.
+
+ 
+
+3. Sản phẩm lắp đặt rồi có còn được đổi trả không?
+
+Tiki vẫn sẽ hỗ trợ đổi trả bình thường theo chính sách nếu sản phẩm phát sinh lỗi kỹ thuật nhưng rất tiếc sẽ không thể hỗ trợ trả do nhu cầu.
+
+ 
+
+4. Sau khi lắp đặt xong tôi có thể yêu cầu thêm như chỉnh sửa lại vị trí, ..v..v.. hay không? Chất lượng lắp đặt không tốt thì sao?
+ 
+
+Quý khách vui lòng thỏa thuận với nhân viên lắp đặt trước khi thi công và kiểm tra chất lượng thi công trước khi ký xác nhận hoàn tất dịch vụ. Tiki rất tiếc chưa thể hỗ trợ khi việc thi công đã hoàn tất.
+
+Tuy nhiên, nếu việc lắp đặt ảnh hưởng đến chất lượng sản phẩm, quý khách vui lòng liên hệ đến Tiki để được hỗ trợ cụ thể.
+
+ 
+
+5. Tôi có phải trả tiền gì cho nhân viên lắp đặt ngoài phí vật tư không?
+
+Phí công lắp đặt đã được thu cùng với giá trị sản phẩm và được nêu rõ hóa đơn mua hàng tại Tiki, quý khách chỉ cần thanh toán phí vật tư trực tiếp với nhân viên lắp đặt.
+
+ 
+
+6. Tôi đã chọn lắp đặt, nhưng sau khi nhận hàng không cần lắp đặt nữa, tôi có được hoàn phí lắp đặt không?
+
+Tiki rất tiếc sẽ không hỗ trợ việc hoàn phí khi đơn hàng đã được giao thành công. 
+
+ 
+
+7. Tiki có bảo hành dịch vụ lắp đặt không?
+
+Tiki hỗ trợ bảo hành dịch vụ lắp đặt trong vòng 90 ngày kể từ ngày lắp đặt thành công. 
+
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.                
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

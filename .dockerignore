@@ -1,0 +1,38 @@
+# Bỏ qua các thư mục chứa dữ liệu sinh ra trong quá trình chạy
+warehouse/
+data/
+redis-data/
+kafka-data/
+
+# dbt_project/target/ — build artifact, bake nhầm file cũ vào image gây lỗi
+# "Not a directory" khi cấu trúc path giữa các lần chạy/version dbt khác nhau
+# (bug thật đã gặp). KHÔNG loại dbt_packages/ — mỗi task dbt chạy container
+# RIÊNG biệt từ cùng image (không share state), nên `dbt deps` task cài xong
+# không "truyền" sang task khác được — dbt_utils phải bake sẵn vào image.
+dbt_project/target/
+dbt_project/logs/
+
+# Bỏ qua môi trường ảo Python và cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Bỏ qua git
+.git/
+.gitignore
+
+# Chỉ giữ lại code (apps), libs và file cấu hình
+mlruns/
+
+#artifacts/
+
+logs/
+
+.ipynb_checkpoints/
+
+*.parquet
+
+venv/
+.venv/
+flink-env/

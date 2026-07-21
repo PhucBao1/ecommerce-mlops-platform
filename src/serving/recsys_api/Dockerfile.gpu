@@ -1,0 +1,36 @@
+FROM python:3.10-slim
+
+# Biến thể GPU của Dockerfile chính — chỉ khác requirements (torch CUDA thay vì
+# +cpu). Không cần base image nvidia/cuda: torch==...+cu121 wheel tự mang theo
+# CUDA runtime cần thiết, chỉ cần host có NVIDIA driver + nvidia-container-toolkit
+# (đã có sẵn trên GPU instance qua user_data.sh.tpl) và chạy với `docker run --gpus all`.
+# Dùng để benchmark GPU vs CPU cho recsys-api (Two-Tower/SASRec) — KHÔNG dùng cho
+# production (docker-compose.app.yml vẫn build từ Dockerfile gốc, bản CPU).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gettext-base \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY src/serving/recsys_api/requirements-gpu.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY artifacts/recsys_models /app/artifacts/recsys_models
+COPY src /app/src
+
+RUN useradd --no-create-home --system --uid 1001 app \
+    && chown -R app:app /app
+USER app
+
+EXPOSE 8001
+
+# --workers 4: main.py dùng sync Redis client (redis-py) gọi trực tiếp trong
+# route async def, không qua run_in_executor — mỗi request block nguyên event
+# loop cho tới khi Redis I/O xong. Với --workers 1 (mặc định), 60+ request đồng
+# thời bị serialize hoàn toàn qua 1 event loop duy nhất, gây queueing hàng giây
+# dù compute thật chỉ ~8ms/request (đo được qua benchmark GPU vs CPU 16/7/2026).
+# 4 worker = 4 process riêng, mỗi process tự load model lên GPU (model 8MB, tốn
+# thêm VRAM không đáng kể so với 16GB của T4) — đổi lấy 4 event loop độc lập
+# xử lý song song thật, không còn nghẽn ở tầng ASGI.
+CMD ["sh", "-c", "envsubst < /app/src/feature_store/feature_repo/feature_store.yaml > /tmp/fs.yaml && mv /tmp/fs.yaml /app/src/feature_store/feature_repo/feature_store.yaml && exec uvicorn src.serving.recsys_api.main:app --host 0.0.0.0 --port 8001 --workers 4"]

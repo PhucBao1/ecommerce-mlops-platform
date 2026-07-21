@@ -1,0 +1,96 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 30s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+scrape_configs:
+
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["prometheus:9090"]
+
+  - job_name: "mlflow"
+    static_configs:
+      - targets: ["mlflow:5000"]
+
+  - job_name: "fastapi-recsys"
+
+    metrics_path: /metrics
+
+    static_configs:
+      - targets:
+          - recsys-api:8001
+        labels:
+          backend: "cpu"
+      # recsys-api-gpu — benchmark GPU vs CPU cho Two-Tower/SASRec (16/7/2026).
+      # Deploy thủ công trên GPU instance (không qua docker-compose, không có
+      # EC2 tag Role=vllm-gpu riêng cho service này) nên khai báo static target
+      # thẳng IP private thay vì ec2_sd_configs như job vllm-gpu-metrics bên dưới.
+      - targets:
+          - 10.0.1.115:8001
+        labels:
+          backend: "gpu"
+
+  - job_name: "agent-api"
+
+    metrics_path: /metrics
+
+    static_configs:
+      - targets:
+          - agent-api:8003
+
+  - job_name: "node-exporter"
+
+    static_configs:
+      - targets: ["node-exporter:9100"]
+
+  - job_name: "cadvisor"
+
+    static_configs:
+      - targets: ["cadvisor:8080"]
+
+  - job_name: "redis-exporter"
+
+    static_configs:
+      - targets: ["redis-exporter:9121"]
+
+  - job_name: "stream_processor"
+
+    metrics_path: /metrics
+
+    static_configs:
+      - targets: ["recsys-consumer:8010"]
+
+  - job_name: "vllm-gpu-metrics"
+    metrics_path: /metrics
+    ec2_sd_configs:
+      - region: ap-southeast-1
+        port: 8000
+        filters:
+          - name: "tag:Role"
+            values: ["vllm-gpu"]
+          - name: "instance-state-name"
+            values: ["running"]
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_Name]
+        target_label: instance_name
+
+  - job_name: "dcgm-exporter"
+    ec2_sd_configs:
+      - region: ap-southeast-1
+        port: 9400
+        filters:
+          - name: "tag:Role"
+            values: ["vllm-gpu"]
+          - name: "instance-state-name"
+            values: ["running"]
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_Name]
+        target_label: instance_name

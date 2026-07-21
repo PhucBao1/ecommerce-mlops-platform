@@ -1,0 +1,218 @@
+services:
+
+  # Postgres tự host cho MLflow — CHỈ dùng lúc local dev (MinIO/không có RDS).
+  # Trên AWS, POSTGRES_MLFLOW_HOST trỏ sang RDS (xem secrets.tf), container này
+  # không cần chạy — dùng profile "local-db" để tắt hẳn, đỡ tốn RAM EC2.
+  # Local dev:  docker compose -f docker-compose.monitor.yml --profile local-db up
+  # AWS:        docker compose -f docker-compose.monitor.yml up   (không có profile → skip)
+  postgres:
+    image: postgres:15
+
+    container_name: mlflow-postgres
+
+    profiles: ["local-db"]
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_MLFLOW_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_MLFLOW_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_MLFLOW_DB}
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - mlflow-postgres:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+    networks:
+      - data-network
+
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.12.1
+
+    container_name: mlflow
+
+    ports:
+      - "5000:5000"
+
+    command: >
+      /bin/bash -c "
+      pip install --no-cache-dir psycopg2-binary boto3 &&
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri postgresql://${POSTGRES_MLFLOW_USER}:${POSTGRES_MLFLOW_PASSWORD}@${POSTGRES_MLFLOW_HOST:-postgres}:5432/${POSTGRES_MLFLOW_DB}
+      --artifacts-destination s3://${MLFLOW_ARTIFACT_BUCKET:-mlflow}/
+      --serve-artifacts
+      "
+
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
+
+    # Không depends_on: postgres nữa — trên AWS RDS luôn sẵn sàng (không cần chờ
+    # "healthy" như container mới boot), trên local dev tự chạy kèm --profile
+    # local-db thì thứ tự start không quan trọng vì mlflow tự retry kết nối DB.
+    restart: unless-stopped
+
+    networks:
+      - data-network
+
+
+  prometheus:
+    image: prom/prometheus:latest
+
+    container_name: prometheus
+
+    ports:
+      - "9090:9090"
+
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus:/etc/prometheus/rules
+      - prometheus-storage:/prometheus
+
+    restart: unless-stopped
+
+    networks:
+      - data-network
+
+  node-exporter:
+    image: prom/node-exporter:latest
+
+    container_name: node-exporter
+
+    ports:
+      - "9100:9100"
+
+    command:
+      - '--path.rootfs=/host'
+
+    pid: host
+
+    volumes:
+      - '/:/host:ro,rslave'
+
+    restart: unless-stopped
+
+    networks:
+      - data-network
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+
+    container_name: cadvisor
+
+    ports:
+      - "8084:8080" # 8080 xung đột thật với airflow-webserver (batch_dev.yml) trên cùng host
+
+    privileged: true
+
+    devices:
+      - /dev/kmsg
+
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+
+    restart: unless-stopped
+
+    networks:
+      - data-network
+
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+
+    container_name: redis-exporter
+
+    ports:
+      - "9121:9121"
+
+    environment:
+      REDIS_ADDR: redis://:${REDIS_PASSWORD}@redis:6379
+
+    restart: unless-stopped
+
+    networks:
+      - data-network
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    environment:
+      # Storage in-memory mặc định không giới hạn — sau 32h uptime đã phình lên
+      # 1.44GB, góp phần làm host m7i-flex.large (2vCPU/8GB) cạn RAM/swap đầy
+      # (BENCHMARK_RESULTS.md bug #12). Chặn trần số trace giữ trong RAM.
+      - MEMORY_MAX_TRACES=10000
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "4317:4317"    # OTLP gRPC receiver
+    restart: unless-stopped
+    networks:
+      - data-network
+
+  alertmanager:
+    image: prom/alertmanager:latest
+
+    container_name: alertmanager
+
+    ports:
+      - "9093:9093"
+
+    volumes:
+      - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+
+    networks:
+      - data-network
+
+  grafana:
+    image: grafana/grafana:latest
+
+    container_name: grafana
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD:-admin}
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/recsys_all_in_one.json
+
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+
+    depends_on:
+      - prometheus
+
+    restart: unless-stopped
+
+    networks:
+      - data-network
+
+
+volumes:
+  grafana-storage:
+  prometheus-storage:
+  mlflow-postgres:
+
+
+networks:
+  data-network:
+    external: true
+    name: my_shared_network

@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "AgentFeedback",
+  "namespace": "com.ecommerce.streaming",
+  "doc": "User feedback event (click/purchase/ignore) from shopping agent — RLHF signal",
+  "fields": [
+    {"name": "customer_id",  "type": "string",           "doc": "Customer who interacted"},
+    {"name": "product_id",   "type": "string",           "doc": "Product that was interacted with"},
+    {"name": "action",       "type": "string",           "doc": "click | purchase | ignore"},
+    {"name": "weight",       "type": "int",              "doc": "Training signal weight: purchase=3, click=1, ignore=0"},
+    {"name": "source",       "type": ["null", "string"], "default": null, "doc": "recommend | search | graph"},
+    {"name": "session_id",   "type": ["null", "string"], "default": null},
+    {"name": "ts",           "type": "long",             "doc": "Unix timestamp (seconds)"}
+  ]
+}

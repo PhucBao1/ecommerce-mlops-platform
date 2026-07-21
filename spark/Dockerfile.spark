@@ -1,0 +1,53 @@
+FROM tabulario/spark-iceberg:latest
+
+# Chuyển sang quyền root để có thể ghi file vào thư mục /opt/spark/jars
+USER root
+
+# Tải Hadoop AWS
+RUN curl -o /opt/spark/jars/hadoop-aws-3.3.4.jar \
+    https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar
+
+# Tải AWS SDK Bundle
+RUN curl -o /opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar \
+    https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.262/aws-java-sdk-bundle-1.12.262.jar
+
+# Tải thêm Iceberg AWS Bundle (Bắt buộc để dùng được org.apache.iceberg.aws.s3.S3FileIO)
+RUN curl -o /opt/spark/jars/iceberg-aws-bundle-1.4.3.jar \
+    https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-aws-bundle/1.4.3/iceberg-aws-bundle-1.4.3.jar
+
+# Tải PostgreSQL JDBC Driver
+RUN curl -o /opt/spark/jars/postgresql-42.5.4.jar \
+    https://repo1.maven.org/maven2/org/postgresql/postgresql/42.5.4/postgresql-42.5.4.jar
+
+# 👇 1. Ép Spark sử dụng đúng Python 3
+ENV PYSPARK_PYTHON=python3
+ENV PYSPARK_DRIVER_PYTHON=python3
+
+# 👇 2. Cài đặt Python requirements bằng python3 -m pip (thay vì pip không)
+COPY spark/requirements.txt /tmp/
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install --no-cache-dir -r /tmp/requirements.txt
+
+# =========================
+# SPARK CONFIG (QUAN TRỌNG)
+# =========================
+#COPY spark/conf/spark-defaults.conf /opt/spark/conf/spark-defaults.conf
+#COPY spark/conf/hive-site.xml /opt/spark/conf/hive-site.xml
+#ENV SPARK_CONF_DIR=/opt/spark/conf
+# Thư mục config Spark
+ENV SPARK_CONF_DIR=/opt/spark/conf
+COPY spark/conf/spark-defaults.conf /opt/spark/conf/spark-defaults.conf
+
+# 3. [QUAN TRỌNG] Đóng gói toàn bộ code vào trong Image
+COPY ./src /opt/workspace/src
+COPY ./artifacts/nlp_models /opt/workspace/artifacts/nlp_models
+
+# Copy entrypoint của bạn
+COPY spark/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Đặt thư mục làm việc mặc định
+WORKDIR /opt/workspace
+
+# QUAN TRỌNG
+ENTRYPOINT ["/entrypoint.sh"]

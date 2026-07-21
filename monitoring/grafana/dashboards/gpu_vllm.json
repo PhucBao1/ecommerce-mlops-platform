@@ -1,0 +1,280 @@
+{
+  "id": null,
+  "uid": "phase2-gpu-vllm",
+  "title": "Phase 2 — GPU / vLLM",
+  "description": "GPU utilization/VRAM/temperature (DCGM exporter) + vLLM request/queue/KV-cache metrics — chỉ có data sau khi terraform/phase2/ apply xong và điền scrape target thật vào monitoring/prometheus.yml.",
+  "tags": [
+    "vllm",
+    "gpu",
+    "phase2"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "10s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "templating": {
+    "list": []
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "GPU Utilization (%)",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "DCGM_FI_DEV_GPU_UTIL",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "GPU VRAM Used (MB)",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decmbytes",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "DCGM_FI_DEV_FB_USED",
+          "legendFormat": "{{instance}} used"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "DCGM_FI_DEV_FB_FREE",
+          "legendFormat": "{{instance}} free"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "GPU Temperature (°C)",
+      "gridPos": { "x": 0, "y": 8, "w": 8, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "DCGM_FI_DEV_GPU_TEMP",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "vLLM — Requests Running vs Waiting (queue depth)",
+      "description": "num_requests_waiting > 0 kéo dài = replica quá tải, cần thêm replica hoặc giảm max_model_len/batch",
+      "gridPos": { "x": 8, "y": 8, "w": 8, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "vllm:num_requests_running",
+          "legendFormat": "{{instance}} running"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "vllm:num_requests_waiting",
+          "legendFormat": "{{instance}} waiting"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "vLLM — KV-Cache Usage (%)",
+      "description": "Tăng dần theo concurrent request + context length — gần 100% là dấu hiệu cần scale thêm replica. Tên metric đúng cho vLLM 0.25.1 là kv_cache_usage_perc (KHÔNG phải gpu_cache_usage_perc — bản cũ dùng tên đó, đã đổi, verify qua liệt kê __name__ thật từ /metrics, cùng lỗi với panel Time-Per-Output-Token đã sửa trước đó).",
+      "gridPos": { "x": 16, "y": 8, "w": 8, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "vllm:kv_cache_usage_perc",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "vLLM — Time to First Token (p50/p95)",
+      "description": "So với baseline Ollama CPU (~57-89s/câu tổng, không tách TTFT) — đây là con số trực tiếp thể hiện lợi ích continuous batching + PagedAttention",
+      "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.5, rate(vllm:time_to_first_token_seconds_bucket[5m]))",
+          "legendFormat": "{{instance}} p50"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.95, rate(vllm:time_to_first_token_seconds_bucket[5m]))",
+          "legendFormat": "{{instance}} p95"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "vLLM — End-to-End Request Latency (p50/p95)",
+      "gridPos": { "x": 12, "y": 16, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.5, rate(vllm:e2e_request_latency_seconds_bucket[5m]))",
+          "legendFormat": "{{instance}} p50"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.95, rate(vllm:e2e_request_latency_seconds_bucket[5m]))",
+          "legendFormat": "{{instance}} p95"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "vLLM — Generation Throughput (tokens/sec)",
+      "description": "rate() trên counter tổng — tokens/sec thật của decode (prompt = prefill, generation = decode). Trả lời trực tiếp câu hỏi '3 RPS x 300 token khác 3 RPS x 50 token' — xem BENCHMARK_RESULTS.md mục 18b.",
+      "gridPos": { "x": 0, "y": 24, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "rate(vllm:generation_tokens_total[5m])",
+          "legendFormat": "{{instance}} generation (decode)"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "rate(vllm:prompt_tokens_total[5m])",
+          "legendFormat": "{{instance}} prompt (prefill)"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "vLLM — Time Per Output Token / Decode Speed (p50/p95)",
+      "description": "Thời gian sinh MỖI token lúc decode (khác TTFT ở panel trên — TTFT chỉ đo prefill+queue). Kết hợp 2 panel này mới tách được latency = queue + prefill + decode như câu hỏi đã đặt ra. Tên metric đúng cho vLLM 0.25.1 là request_time_per_output_token_seconds (KHÔNG phải time_per_output_token_seconds — đã verify trực tiếp qua /metrics thật, tên cũ trả về rỗng).",
+      "gridPos": { "x": 12, "y": 24, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.5, sum(rate(vllm:request_time_per_output_token_seconds_bucket[5m])) by (le, instance))",
+          "legendFormat": "{{instance}} p50"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.95, sum(rate(vllm:request_time_per_output_token_seconds_bucket[5m])) by (le, instance))",
+          "legendFormat": "{{instance}} p95"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "vLLM — Latency Breakdown: Queue vs Prefill vs Decode (p50)",
+      "description": "Trả lời trực tiếp câu hỏi 'latency = queue + prefill + decode' — đo thật 18/7/2026: queue~0.15s, prefill~0.5s, decode~8.1s (áp đảo) trên 1 request policy điển hình. Xác nhận decode là phần chiếm thời gian nhiều nhất, không phải queue hay prefill.",
+      "gridPos": { "x": 0, "y": 32, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.5, sum(rate(vllm:request_queue_time_seconds_bucket[5m])) by (le, instance))",
+          "legendFormat": "{{instance}} queue"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.5, sum(rate(vllm:request_prefill_time_seconds_bucket[5m])) by (le, instance))",
+          "legendFormat": "{{instance}} prefill"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.5, sum(rate(vllm:request_decode_time_seconds_bucket[5m])) by (le, instance))",
+          "legendFormat": "{{instance}} decode"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "vLLM — Prefix Cache Hit Rate",
+      "description": "rate(hits)/rate(queries) — đo thật 18/7/2026: ~68.5% sau khi bật --enable-prefix-caching, xác nhận flag hoạt động thật (không chỉ bật cờ suông).",
+      "gridPos": { "x": 12, "y": 32, "w": 12, "h": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "sum(rate(vllm:prefix_cache_hits_total[5m])) by (instance) / sum(rate(vllm:prefix_cache_queries_total[5m])) by (instance)",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    }
+  ]
+}

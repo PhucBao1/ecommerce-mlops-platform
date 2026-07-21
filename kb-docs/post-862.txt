@@ -1,0 +1,99 @@
+# Cách khắc phục về các vấn đề thanh toán trên Tiki
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/862
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Đặt hàng và Thanh toán / Thanh Toán Tại Tiki
+ Cách khắc phục về các vấn đề thanh toán trên Tiki
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 204
+
+Quý khách đang gặp khó khăn trong quá trình mua hàng và thanh toán trên Tiki, hãy bình tĩnh và tham khảo nguyên nhân cũng như hướng xử lý bên dưới nhé:
+
+
+
+1. Một số lỗi thường gặp khi thanh toán mua hàng
+
+Phiên bản ứng dụng/ thiết bị không hỗ trợ.
+Kết nối mạng Internet không ổn định.
+Trục trặc trong quá trình liên kết với ứng dụng ngân hàng/ ví điện tử.
+Gặp sự cố trong quá trình liên kết thẻ/ ví điện tử.
+Tài khoản không đủ số dư/ hết hạn mức.
+Thẻ/ ví điện tử không được chấp nhận bởi hệ thống thanh toán vì nhiều nguyên nhân.
+Chưa đăng ký dịch vụ thanh toán trực tuyến/ tài khoản/ thẻ/ ví điện tử bị hạn chế.
+Chưa nhập/ nhập sai thông tin tài khoản/ mã số thẻ/ mã xác thực (SMS OTP/ Smart OTP/ Safekey).
+Sản phẩm/ số tiền thanh toán/ mã giảm giá chưa hợp lệ. 
+
+ 
+
+        
+
+ 
+
+(Hình ảnh ví dụ thanh toán lỗi)
+
+Trên đây là một số lỗi thanh toán thường gặp khi mua hàng tại Tiki và tương ứng có nhiều hướng xử lý khác nhau cho mỗi trường hợp, tuỳ vào lỗi quý khách gặp phải để lựa chọn phù hợp.
+
+
+2. Một số hướng xử lý có thể áp dụng
+
+Tham khảo theo hướng dẫn khi hệ thống thanh toán trả kết quả.
+Cập nhật ứng dụng phiên bản mới nhất hoặc nâng cấp phiên bản điện thoại phù hợp.
+Gỡ bỏ các phần mềm/ ứng dụng không được phép.
+Kiểm tra, khởi động lại mạng internet, kiểm tra đường truyền, IP mạng và thiết bị.
+Kiểm tra lại số dư/ hạn mức thẻ, đảm bảo hạn mức thanh toán trong ngày và tài khoản được phép thanh toán online.
+Thử xoá và liên kết lại thẻ/ví điện tử với Tài khoản Tiki, để xoá liên kết thẻ/ví điện tử tại đây
+Liên hệ ngân hàng/đối tác thanh toán để biết thêm chi tiết lỗi và hướng xử lý.
+Xóa cache và cookies, tắt ứng dụng/ trình duyệt và thử lại hoặc sử dụng trình duyệt khác để thanh toán, Hướng dẫn xóa cookie trên trình duyệt Chrome như sau.
+Mở Chrome trên máy tính.
+Ở trên cùng bên phải, nhấp vào biểu tượng Tùy chọn khác  => Cài đặt .
+Nhấp vào Quyền riêng tư và bảo mật Cookie và các dữ liệu khác của trang web.
+Nhấp vào Xem tất cả dữ liệu và quyền của trang web => Xoá tất cả dữ liệu.
+Để xác nhận, hãy nhấp vào Xoá.
+
+⚠Lưu ý: Nếu xóa Cookie, quý khách có thể bị đăng xuất khỏi các trang web ghi nhớ thông tin của quý khách và các lựa chọn ưu tiên quý khách đã lưu cũng có thể bị xoá.
+
+Vào dịp cao điểm hay chiến dịch khuyến mãi hệ thống thanh toán có thể gặp sự cố quá tải, quý khách vui lòng thông cảm và thử lại sau ít phút.
+
+3. Thử thanh toán bằng một phương thức khác
+
+Nếu đã thử tất cả các cách trên nhưng vẫn không giải quyết được vấn đề quý khách gặp phải, quý khách vui lòng gửi yêu cầu hỗ trợ đến Tiki: https://tiki.vn/lien-he/gui-yeu-cau. Bộ phận hỗ trợ thanh toán của Tiki ghi nhận xử lý và sẽ phản hồi quý khách nhanh chóng.
+
+Trong thời gian chờ đợi để tránh ảnh hưởng tới trải nghiệm mua sắm, quý khách có thể thử lại phương thức thanh toán khác hoặc chọn thanh toán khi nhận hàng (COD) nếu gặp sự cố khi giao dịch.Hướng dẫn đổi phương thức thanh toán:
+
+Đăng nhập vào trang Tiki.
+Vào giỏ hàng và chọn những sản phẩm cần mua hoặc thực hiện thanh toán lại nếu đã có đơn hàng.
+Chọn phương thức thanh toán khác hoặc thêm phương thức thanh toán mới.
+Tiến hành đặt mua.
+
+Quý khách có thể tham khảo các phương thức thanh toán khác tại đây.
+
+Trong trường hợp tài khoản của quý khách không hiển thị thanh toán trả trước, tham khảo tại đây hoặc liên hệ tổng đài để biết thêm chi tiết.
+
+Với những thông tin trên mong rằng sẽ giúp ích cho quý khách. Với bất kỳ câu hỏi thắc mắc nào khác, quý khách hãy liên hệ qua kênh Trợ lý cá nhân hoặc Tổng đài 1900-6035 (1.000 đ/phút, 8-21h kể cả T7, CN). Mọi ý kiến đóng góp của quý khách đều quý giá đối với Tiki.
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.         
+
+ 
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

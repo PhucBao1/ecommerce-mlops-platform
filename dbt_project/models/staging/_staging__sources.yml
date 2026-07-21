@@ -1,0 +1,51 @@
+version: 2
+
+sources:
+  - name: lakehouse_silver
+    schema: silver
+    tables:
+      - name: cleaned_product
+        columns:
+          - name: product_id
+            tests:
+              - not_null
+              - unique
+          - name: price
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 0
+          - name: category_id
+            tests:
+              - not_null
+
+      - name: cleaned_comment
+        columns:
+          - name: review_id
+            tests:
+              - not_null
+              - unique
+          - name: customer_id
+            tests:
+              - not_null
+          - name: product_id
+            tests:
+              - not_null
+          - name: rating
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [0, 1, 2, 3, 4, 5]
+
+      - name: prediction_events
+        description: >
+          Recommendation impressions and user actions (click/purchase),
+          consumed from the recsys_predictions Kafka topic.
+        columns:
+          - name: experiment_group
+            tests:
+              - not_null
+          - name: event_time
+            tests:
+              - not_null
+          - name: action

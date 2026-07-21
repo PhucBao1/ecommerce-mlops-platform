@@ -1,0 +1,53 @@
+name: CI - dbt Compile & Checks
+
+# Run only when creating a pull request to the main branch
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  dbt-ci:
+    name: Build & Check dbt Models
+    runs-on: ubuntu-latest
+
+    # Declare the directory that contains your dbt project
+    env:
+      DBT_PROJECT_DIR: "dbt_project"
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # Install dbt-spark (including PySpark)
+      - name: Install dbt-spark
+        run: pip install dbt-spark[session]==1.10.1 pyspark==3.5.1
+
+      # Create a Dummyd profiles.yml for Spark
+      - name: Create Dummy profiles.yml for Spark
+        run: |
+          mkdir -p ~/.dbt
+          echo "
+          ecommerce_absa: #
+            target: ci
+            outputs:
+              ci:
+                type: spark
+                method: session # Use a session to easily simulate it on CI
+                host: localhost # unused by session method, but required by schema
+                schema: default
+                threads: 1
+          " > ~/.dbt/profiles.yml
+
+      - name: Install dbt Dependencies
+        # Download dbt packages (such as dbt-utils), if any
+        run: dbt deps
+
+      - name: Compile dbt Models
+        # Translate Jinja into pure Spark SQL to detect table name errors or syntax mistakes
+        run: dbt compile

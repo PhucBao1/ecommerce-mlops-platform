@@ -1,0 +1,67 @@
+# Tại sao tôi không đăng nhập được?
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/880
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Tài khoản của tôi / Đăng nhập
+ Tại sao tôi không đăng nhập được?
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 237
+
+Tiki khuyến khích quý khách sử dụng trình duyệt Google Chrome để truy cập website Tiki một cách hiệu quả nhất.
+
+
+Nếu quý khách đã sử dụng trình duyệt này nhưng vẫn chưa thể đăng nhập, Tiki nhận thấy lỗi xảy ra thường do tính năng chặn quảng cáo được cài đặt trên trình duyệt của quý khách. Một dấu hiệu nhận biết thường gặp là tại góc phải của trình duyệt sẽ xuất hiện icon màu đỏ hình bàn tay, quý khách vui lòng tạm gỡ bỏ (hoặc tắt) tính năng theo các bước như sau:
+ 
+
+Bước 1: Mở trình duyệt Google Chrome
+
+Góc phải trên cùng của trình duyệt có biểu tượng , quý khách nhấp vào mục "Extension".
+
+ 
+
+
+Bước 2: 
+
+Vào "Manage Extensions".
+Kiểm tra xem có Extensions nào chặn quảng cáo không, phổ biến nhất là chương trình AdBlock có icon bên dưới.
+
+
+
+
+
+Bước 3:
+
+Click chọn "Remove" để tắt chương trình.
+Truy cập Tiki.vn để thử lại.
+
+ Trong trường hợp sử dụng trình duyệt khác hoặc không cài đặt bất kỳ tính năng chặn nào hay đã thực hiện đầy đủ các thao tác trên nhưng vẫn không thể đăng nhập, quý khách vui lòng gửi yêu cầu hỗ trợ đến Tiki tại đây và đính kèm ảnh chụp màn hình thông báo lỗi (nếu có), điền đầy đủ thông tin về cách thức để Tiki liên lạc với quý khách, trình duyệt đang sử dụng và mô tả ngắn gọn lỗi xảy ra để Tiki kiểm tra hỗ trợ chính xác.
+
+Tiki chân thành xin lỗi quý khách về sự bất tiện đã xảy ra trong quá trình sử dụng dịch vụ cũng như cam kết sẽ ngày càng nâng cao độ tiện ích tại website Tiki nhằm mang đến trải nghiệm mua sắm online tốt nhất cho tất cả khách hàng.
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.    
+
+  
+
+ 3Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

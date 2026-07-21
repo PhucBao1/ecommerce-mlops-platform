@@ -1,0 +1,3 @@
+dbt_project/snapshots/
+dbt_project/target/
+dbt_project/dbt_packages/

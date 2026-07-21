@@ -1,0 +1,23 @@
+# Copy file này thành terraform.tfvars (đã bị .gitignore, không commit) rồi điền giá trị thật.
+# Không dùng flag -var trên CLI cho giá trị nhạy cảm (lộ qua shell history) — dùng
+# TF_VAR_xxx env var hoặc file .tfvars này.
+
+aws_region   = "ap-southeast-1"
+project_name = "ecommerce-mlops"
+
+# Lấy IP public của bạn: curl -s ifconfig.me
+my_ip = "1.2.3.4/32"
+
+# Tên key-pair đã tạo sẵn trong AWS Console → EC2 → Key Pairs (KHÔNG tạo qua
+# Terraform vì file .pem private key cần tải về ngay lúc tạo, Terraform không
+# làm việc này an toàn được)
+key_pair_name = "my-keypair-name"
+
+github_repo   = "PhucBao1/Ecommerce"
+github_branch = "main"
+
+# Đặt qua biến môi trường thay vì ghi thẳng ở đây (tránh lỡ tay commit):
+#   export TF_VAR_db_password="..."
+#   export TF_VAR_github_pat="ghp_..."      # GitHub PAT, scope "repo" (read-only đủ dùng)
+# db_password = "..."
+# github_pat  = "..."

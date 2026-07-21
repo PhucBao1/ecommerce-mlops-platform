@@ -1,0 +1,76 @@
+name: CI - Python Tests
+
+# Chạy cả trên push, không chỉ pull_request: repo này commit thẳng lên branch,
+# nên workflow chỉ-PR trước đây gần như KHÔNG BAO GIỜ chạy — có test mà không ai
+# gác thì cũng như không.
+#
+# Có cả `dev` vì push lên `main` sẽ kích hoạt docker_build.yml (build → ECR →
+# SSM deploy xuống EC2). Muốn chạy test mà chưa muốn deploy thì push `dev` —
+# nếu workflow này chỉ nghe `main` thì đúng lúc đó lại không có test nào chạy.
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+
+    # Redis thật cho test cost_guard (budget/circuit breaker) và rate limit.
+    # Không có nó thì các test đó tự skip — xanh giả, không gác được gì.
+    services:
+      redis:
+        image: redis/redis-stack-server:7.2.0-v11
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    env:
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: pip
+
+      - name: Setup Java 17 (Spark 3.4)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Download Iceberg runtime jar
+        run: |
+          curl -sSL -o /tmp/iceberg-spark-runtime.jar \
+            https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.4_2.12/1.4.3/iceberg-spark-runtime-3.4_2.12-1.4.3.jar
+          ls -lh /tmp/iceberg-spark-runtime.jar
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-test.txt
+          pip install flake8
+
+      - name: Run Linter (Flake8)
+        run: flake8 src/ airflow/dags/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
+
+      - name: Run Unit Tests (Pytest)
+        env:
+          ICEBERG_JAR: /tmp/iceberg-spark-runtime.jar
+        run: pytest tests/ -v

@@ -1,0 +1,6 @@
+outs:
+- md5: d02ed437d7590fac871087dbb5f4ed40.dir
+  size: 2817781
+  nfiles: 2
+  hash: md5
+  path: data_menu

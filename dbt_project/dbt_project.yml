@@ -1,0 +1,11 @@
+name: ecommerce_project
+version: 1.0.0
+profile: ecommerce_absa
+
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+
+snapshots:
+  +file_format: iceberg

@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "RecSysPrediction",
+  "namespace": "com.ecommerce.streaming",
+  "doc": "Recommendation event emitted when RecSys API returns results to a user",
+  "fields": [
+    {"name": "customer_id",       "type": "string", "doc": "User who received recommendations"},
+    {"name": "recommended_items", "type": {"type": "array", "items": "string"}, "doc": "List of recommended product_ids (ordered)"},
+    {"name": "model_version",     "type": "string", "doc": "MLflow model version used for scoring"},
+    {"name": "retrieval_backend", "type": "string", "doc": "twotower | lightgcn | sasrec"},
+    {"name": "ts",                "type": "long",   "doc": "Unix timestamp (seconds)"},
+    {"name": "latency_ms",        "type": ["null", "float"], "default": null, "doc": "End-to-end serving latency"},
+    {"name": "session_id",        "type": ["null", "string"], "default": null, "doc": "Browser/app session ID for click attribution"}
+  ]
+}

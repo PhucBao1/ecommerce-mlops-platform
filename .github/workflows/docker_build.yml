@@ -1,0 +1,201 @@
+name: CI/CD — Build → Scan → Push ECR → Deploy EC2
+
+# PR       → build + security scan (no push, no deploy)
+# Push main → build + scan + push ECR + rolling deploy via SSM (no SSH key needed)
+#
+# AWS auth uses OIDC (no long-lived keys stored in GitHub Secrets):
+#   GitHub Variables to set (Settings → Secrets and variables → Actions → Variables):
+#     AWS_ROLE_ARN       — from: terraform output github_actions_role_arn
+#     ECR_REGISTRY       — from: terraform output ecr_registry
+#     EC2_INSTANCE_ID    — from: terraform output ec2_instance_id
+#     AWS_REGION         — ap-southeast-1
+
+on:
+  push:
+    branches: [main]
+
+# NOTE: not triggered on pull_request — bước "Download model artifacts from S3"
+# và ECR push/SSM deploy đều cần AWS credentials (chỉ cấp qua OIDC cho push,
+# PR từ fork không nên có quyền này). Có thể enable pull_request nếu chỉ muốn
+# chạy Trivy scan (không cần AWS auth) bằng cách tách job riêng.
+
+permissions:
+  id-token: write    # required for OIDC token request
+  contents: read
+  security-events: write  # required for SARIF upload to GitHub Security tab
+
+jobs:
+  build-scan-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      # ─── AWS auth via OIDC (push to main only) — chuyển lên đầu vì bước tải
+      # artifacts từ S3 bên dưới cần credentials trước khi build ──────────────
+      - name: Configure AWS credentials (OIDC — no long-lived keys)
+        if: github.event_name == 'push'
+        id: aws-auth
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'ap-southeast-1' }}
+
+      - name: Download model artifacts from S3
+        if: github.event_name == 'push' && steps.aws-auth.outcome == 'success'
+        run: aws s3 sync s3://ecommerce-mlops-lakehouse/model_artifacts/ artifacts/
+
+      # ─── Build tất cả 5 image tự build (bản gốc chỉ có 3, thiếu recsys-consumer/
+      # recsys-producer dù docker-compose.app.yml có 2 service này) ──────────────
+      - name: Build RecSys API
+        run: docker build -f src/serving/recsys_api/Dockerfile -t recsys-api:${{ github.sha }} .
+
+      - name: Build Sentiment API (PhoBERT)
+        run: docker build -f src/serving/nlp_api/Dockerfile -t sentiment-api:${{ github.sha }} .
+
+      - name: Build Agent API
+        run: docker build -f docker/Dockerfile.agent_api -t agent-api:${{ github.sha }} .
+
+      - name: Build RecSys Consumer
+        run: docker build -f src/data_pipeline/streaming/consumer/Dockerfile -t recsys-consumer:${{ github.sha }} .
+
+      - name: Build RecSys Producer
+        run: docker build -f src/data_pipeline/streaming/producer/Dockerfile -t recsys-producer:${{ github.sha }} .
+
+      # ─── Security scan (Trivy) — runs on both PR and push ───────────────────
+      - name: Scan IaC + Dockerfiles misconfig (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: .
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: '0'
+
+      - name: Scan RecSys API (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: recsys-api:${{ github.sha }}
+          format: sarif
+          output: trivy-recsys.sarif
+          severity: HIGH,CRITICAL
+          exit-code: '0'       # warn-only; change to '1' to block on CVEs
+          ignore-unfixed: true
+
+      - name: Scan Sentiment API (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: sentiment-api:${{ github.sha }}
+          format: sarif
+          output: trivy-sentiment.sarif
+          severity: HIGH,CRITICAL
+          exit-code: '0'
+          ignore-unfixed: true
+
+      - name: Scan Agent API (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: agent-api:${{ github.sha }}
+          format: sarif
+          output: trivy-agent.sarif
+          severity: HIGH,CRITICAL
+          exit-code: '0'
+          ignore-unfixed: true
+
+      - name: Scan RecSys Consumer (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: recsys-consumer:${{ github.sha }}
+          format: sarif
+          output: trivy-consumer.sarif
+          severity: HIGH,CRITICAL
+          exit-code: '0'
+          ignore-unfixed: true
+
+      - name: Scan RecSys Producer (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: recsys-producer:${{ github.sha }}
+          format: sarif
+          output: trivy-producer.sarif
+          severity: HIGH,CRITICAL
+          exit-code: '0'
+          ignore-unfixed: true
+
+      - name: Upload Trivy results → GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: .
+          category: trivy
+
+      # ─── Push to ECR ────────────────────────────────────────────────────────
+      - name: Login to ECR
+        if: github.event_name == 'push' && steps.aws-auth.outcome == 'success'
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Push images to ECR
+        if: github.event_name == 'push' && steps.aws-auth.outcome == 'success'
+        env:
+          REGISTRY: ${{ vars.ECR_REGISTRY }}
+          TAG: ${{ github.sha }}
+        run: |
+          for IMAGE in recsys-api sentiment-api agent-api recsys-consumer recsys-producer; do
+            # tag with commit SHA (immutable) and latest (mutable)
+            docker tag ${IMAGE}:$TAG $REGISTRY/${IMAGE}:$TAG
+            docker tag ${IMAGE}:$TAG $REGISTRY/${IMAGE}:latest
+            docker push $REGISTRY/${IMAGE}:$TAG
+            docker push $REGISTRY/${IMAGE}:latest
+          done
+
+      # ─── Rolling deploy via SSM (no SSH key, uses IAM) ──────────────────────
+      - name: Deploy to EC2 via SSM
+        if: github.event_name == 'push' && steps.aws-auth.outcome == 'success'
+        env:
+          INSTANCE_ID: ${{ vars.EC2_INSTANCE_ID }}
+          REGISTRY: ${{ vars.ECR_REGISTRY }}
+          REGION: ${{ vars.AWS_REGION || 'ap-southeast-1' }}
+        run: |
+          COMMAND_ID=$(aws ssm send-command \
+            --region "$REGION" \
+            --instance-ids "$INSTANCE_ID" \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=[
+              "cd /home/ubuntu/repo",
+              "git pull --ff-only",
+              "aws ecr get-login-password --region '"$REGION"' | docker login --username AWS --password-stdin '"$REGISTRY"'",
+              "export ECR_REGISTRY='"$REGISTRY"'",
+              "docker compose --env-file .env.aws -f docker-compose.app.yml pull",
+              "docker compose --env-file .env.aws -f docker-compose.app.yml up -d --remove-orphans"
+            ]' \
+            --output text --query 'Command.CommandId')
+
+          echo "SSM Command ID: $COMMAND_ID"
+
+          # Wait for deploy to finish (timeout 3 minutes)
+          for i in $(seq 1 18); do
+            sleep 10
+            STATUS=$(aws ssm get-command-invocation \
+              --region "$REGION" \
+              --command-id "$COMMAND_ID" \
+              --instance-id "$INSTANCE_ID" \
+              --query 'Status' --output text 2>/dev/null || echo "Pending")
+            echo "[$i] Deploy status: $STATUS"
+            if [[ "$STATUS" == "Success" ]]; then
+              echo "Deploy succeeded"
+              exit 0
+            elif [[ "$STATUS" == "Failed" || "$STATUS" == "Cancelled" ]]; then
+              aws ssm get-command-invocation \
+                --region "$REGION" \
+                --command-id "$COMMAND_ID" \
+                --instance-id "$INSTANCE_ID" \
+                --query 'StandardErrorContent' --output text
+              echo "Deploy failed"
+              exit 1
+            fi
+          done
+          echo "Deploy timed out"
+          exit 1

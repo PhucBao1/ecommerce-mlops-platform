@@ -1,0 +1,67 @@
+# Hình thức xác nhận mã OTP khi giao hàng là gì
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/1105
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Giao và Nhận hàng / Câu Hỏi Thường Gặp Về Giao Nhận Hàng
+ Hình thức xác nhận mã OTP khi giao hàng là gì
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 83
+
+Nhằm đảm bảo tránh sai sót khi giao nhận, Tiki sẽ gửi mã OTP xác nhận khi đơn hàng chuẩn bị tiến hành giao đến quý khách.
+
+
+
+
+ 
+
+1. Tiki sẽ gửi mã OTP với những đơn hàng nào?
+
+Tiki sẽ gửi mã OTP cho những đơn hàng thanh toán trước có giá trị từ 2.000.000 VND và được giao bởi nhân viên vận chuyển Tiki (Không bao gồm thanh toán bằng Tiki xu).
+ 
+
+2. Tôi sẽ nhận mã OTP từ Tiki bằng hình thức nào?
+
+Tiki sẽ gửi mã OTP qua thông báo ứng dụng, email, tin nhắn đến người nhận hàng.
+ 
+
+3. Tôi sẽ làm gì khi không nhận được mã OTP?
+
+Nếu quý khách không nhận được mã OTP, nhân viên giao hàng sẽ hỗ trợ gửi lại mã.
+ 
+
+4. Với những đơn hàng thanh toán trước còn lại, nhân viên giao hàng sẽ xác nhận bằng cách nào?
+
+Nhân viên giao hàng có thể yêu cầu người nhận hàng cung cấp: CCCD hoặc CMND/ giấy phép lái xe để chụp ảnh hoặc ghi lại thông tin.
+
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng. 
+
+   
+
+ 
+
+ 
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

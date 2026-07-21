@@ -1,0 +1,154 @@
+x-airflow-common:
+  &airflow-common
+  # pull_policy mặc định "missing" — pull từ ECR nếu chưa có local, build tay
+  # nếu muốn ép build lại (docker compose build airflow-init)
+  build:
+    context: .
+    dockerfile: docker/Dockerfile.airflow
+    args:
+      DOCKER_GID: 984
+  image: ${ECR_REGISTRY:-ecommerce-local}/airflow:latest
+  environment:
+    &airflow-common-env
+    # ĐỔI SANG LOCAL EXECUTOR CHO NHẸ
+    PATH: "/home/airflow/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_AIRFLOW_USER}:${POSTGRES_AIRFLOW_PASSWORD}@${POSTGRES_AIRFLOW_HOST:-airflow-postgres}/${POSTGRES_AIRFLOW_DB}
+    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+    AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+    # DAG dùng để dựng đúng tên image SPARK_IMAGE/DBT_IMAGE cho DockerOperator —
+    # xem airflow/dags/ecommerce_pipeline.py
+    ECR_REGISTRY: ${ECR_REGISTRY:-}
+    POSTGRES_ICEBERG_HOST: ${POSTGRES_ICEBERG_HOST:-postgres-catalog}
+    POSTGRES_ICEBERG_PORT: ${POSTGRES_ICEBERG_PORT:-5432}
+    POSTGRES_ICEBERG_USER: ${POSTGRES_ICEBERG_USER:-admin}
+    POSTGRES_ICEBERG_PASSWORD: ${POSTGRES_ICEBERG_PASSWORD:-password}
+    POSTGRES_ICEBERG_DB: ${POSTGRES_ICEBERG_DB:-iceberg_metadata}
+    AIRFLOW_VAR_CATALOG_WAREHOUSE: ${CATALOG_WAREHOUSE:-s3a://warehouse/}
+    AIRFLOW_VAR_S3_ENDPOINT_URL: ${S3_ENDPOINT_URL-http://minio:9000}
+    AIRFLOW_VAR_AWS_REGION: ${AWS_REGION:-ap-southeast-1}
+  volumes:
+    - ${AIRFLOW_PROJ_DIR:-.}/airflow/dags:/opt/airflow/dags
+    - ${AIRFLOW_PROJ_DIR:-.}/airflow/logs:/opt/airflow/logs
+    - ${AIRFLOW_PROJ_DIR:-.}/airflow/config:/opt/airflow/config
+    - ${AIRFLOW_PROJ_DIR:-.}/airflow/plugins:/opt/airflow/plugins
+    - /var/run/docker.sock:/var/run/docker.sock
+  user: "50000:984"
+
+
+  group_add:
+    - ${DOCKER_GID:-984}
+
+  # Không còn depends_on postgres:condition:service_healthy ở đây nữa —
+  # airflow-init tự chờ DB sẵn sàng bằng pg_isready (xem bên dưới) trước khi
+  # chạy migrate, và webserver/scheduler chỉ cần chờ airflow-init xong (đã đủ
+  # đảm bảo DB sẵn sàng). Cách này hoạt động cho cả local (airflow-postgres,
+  # profile "local-db") lẫn AWS (RDS, luôn sẵn sàng sẵn, không cần "healthy").
+  depends_on:
+    &airflow-common-depends-on {}
+  networks:
+    - data-network
+
+services:
+  airflow-postgres:
+    image: postgres:13
+    profiles: ["local-db"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_AIRFLOW_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_AIRFLOW_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_AIRFLOW_DB}
+    volumes:
+      - ./data/airflow:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_AIRFLOW_USER}"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+    networks:
+      - data-network
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    #user: root
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        echo "1. Creating directories as ROOT..."
+        mkdir -v -p /opt/airflow/{logs,dags,plugins,config}
+
+        echo "2. Setting correct ownership to airflow user (UID 50000)..."
+        chown -R 50000:0 /opt/airflow/
+
+        echo "2.5. Waiting for Postgres (${POSTGRES_AIRFLOW_HOST:-airflow-postgres}) to be ready..."
+        until pg_isready -h "${POSTGRES_AIRFLOW_HOST:-airflow-postgres}" -U "${POSTGRES_AIRFLOW_USER}"; do
+          echo "Postgres chưa sẵn sàng, thử lại sau 2s..."
+          sleep 2
+        done
+
+        echo "3. Initializing Database as AIRFLOW user..."
+        # Dùng su để chuyển quyền và gọi đường dẫn tuyệt đối của airflow
+        su airflow -c "/home/airflow/.local/bin/airflow db migrate"
+
+        echo "4. Creating Admin user..."
+        su airflow -c "/home/airflow/.local/bin/airflow users create --username ${POSTGRES_AIRFLOW_USER} --password ${POSTGRES_AIRFLOW_PASSWORD} --firstname Admin --lastname User --role Admin --email admin@example.com || true"
+
+        echo "Init completed successfully!"
+    environment:
+      <<: *airflow-common-env
+    user: "0:0"
+
+  dbt:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dbt
+    image: ${ECR_REGISTRY:-ecommerce-local}/dbt:latest
+    container_name: ecommerce_dbt
+    networks:
+      - data-network
+    volumes:
+      - ./dbt_project:/opt/workspace/dbt_project
+    working_dir: /opt/workspace/dbt_project
+    environment:
+      - DBT_PROFILES_DIR=/root/.dbt
+
+networks:
+  data-network:
+    external: true
+    name: my_shared_network

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecommerce-pipeline"
+version = "0.1.0"
+description = "Ecommerce Data Pipeline and MLOps Project"
+authors = [
+    { name = "Bao", email = "bao@example.com" }
+]
+# Bạn có thể liệt kê thư viện ở đây, hoặc vẫn dùng requirements.txt như cũ đều được
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]       # Bắt đầu tìm kiếm từ thư mục gốc
+include = ["src*"]  # Khai báo "src" là một package chính thức
+
+[tool.pytest.ini_options]
+pythonpath = ["."]  # Vẫn giữ lại cái này để pytest luôn nhận diện đúng đường dẫn
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_return_any = false
+warn_unused_ignores = false

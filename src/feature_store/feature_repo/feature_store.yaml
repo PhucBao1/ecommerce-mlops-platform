@@ -1,0 +1,13 @@
+project: recsys_sentiment
+registry: data/registry.db
+provider: local
+online_store:
+    type: redis
+    # db=1 — tách riêng khỏi recommendation cache (db=0). Host/port template hoá
+    # (không hardcode "redis:6379") — bug thật phát hiện 16/7/2026: hardcode
+    # khiến Feast luôn gọi vào hostname Docker-internal không resolve được từ
+    # instance khác subnet (GPU benchmark), fail 100% + retry 2 lần/request
+    # (tenacity, main.py:_fetch_feast_features) trước khi fallback default —
+    # đây là nguồn chính gây P95/P99 cao ở nhánh cold_start.
+    connection_string: "${REDIS_HOST}:${REDIS_PORT},password=${REDIS_PASSWORD},db=1"
+entity_key_serialization_version: 3

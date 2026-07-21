@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recsys-api
+  labels:
+    app: recsys-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: recsys-api
+  template:
+    metadata:
+      labels:
+        app: recsys-api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: recsys-api
+          image: <ECR_URL>/recsys-api:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REDIS_HOST
+              value: redis-service
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://jaeger:4317
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "2000m"
+              memory: "4Gi"
+          lifecycle:
+            preStop:
+              exec:
+                # Drain in-flight requests before SIGTERM — gives load balancer time to remove pod
+                command: ["/bin/sh", "-c", "sleep 5"]
+          readinessProbe:
+            # /ready checks artifacts actually loaded (loaders.READY) + Redis/Feast —
+            # pod removed from Service endpoints until this passes, without being killed.
+            httpGet:
+              path: /ready
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            # /health is a pure liveness check (no dependency on artifacts/Redis/Feast) —
+            # a slow artifact reload or a flaky Feast connection must never trigger a restart.
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 30

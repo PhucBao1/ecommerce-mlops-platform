@@ -1,0 +1,194 @@
+# Tiki VIP - Chương trình Khách hàng thân thiết
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/1135
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Dịch vụ và Chương trình / Tiki VIP - Chương trình Khách hàng thân thiết
+ Tiki VIP - Chương trình Khách hàng thân thiết
+
+ Cập nhật lần cuối: Tháng 1 năm 2026
+Lượt xem: 868
+
+I. Giới thiệu về chương trình Khách hàng thân thiết Tiki VIP
+
+ 
+
+Tiki VIP là chương trình tri ân dành cho khách hàng thân thiết của Tiki, nhằm mang đến trải nghiệm mua sắm tối ưu cùng nhiều ưu đãi và quyền lợi giá trị khi mua sắm thường xuyên tại Tiki. Với các thứ hạng thành viên được xét duyệt theo hành vi mua sắm và mức độ gắn bó, bạn càng mua nhiều – quyền lợi càng hấp dẫn.
+
+ 
+
+Bắt đầu từ tháng 07/2025, tất cả người dùng Tiki sẽ tự động tham gia chương trình và có cơ hội tận hưởng hàng loạt đặc quyền nổi bật.
+
+II. Chính sách hạng thành viên
+2.1 Giới thiệu về các thứ hạng và quy định tích lũy mỗi hạng
+
+Dựa trên tổng giá trị chi tiêu và số đơn hàng tích lũy trong mỗi chu kỳ mua sắm, người dùng Tiki sẽ được xếp hạng thành viên sau:
+
+ 
+
+2.2 Cách tính và quy định về đơn hàng
+
+Về tiêu chí số lượng đơn hàng: Chỉ tính các đơn hàng giao thành công trong chu kỳ (xác định theo thời điểm giao hàng thành công), và loại trừ đơn hàng sau:
+
+Đơn hàng Dịch vụ Tiện ích, Voucher & Dịch vụ
+
+Đơn hàng nạp ngân sách Tiki Ads.
+
+Đơn hàng vi phạm chính sách của Tiki.
+
+Đơn hàng sản phẩm sữa cho trẻ dưới 24 tháng tuổi, bia rượu, dịch vụ, thẻ cào, thẻ game và các hàng hóa, dịch vụ khác không được khuyến mại theo quy định của pháp luật.
+
+Đơn hàng giao không thành công hoặc đơn hàng trả hàng, hoàn tiền (trường hợp đơn hàng bị hủy hoặc khách hàng yêu cầu trả hàng/hoàn tiền, giá trị chi tiêu từ đơn hàng này sẽ bị trừ khỏi số tích lũy trước đó).
+
+Về cách tính số tiền chi tiêu để xếp hạng: Dựa theo các đơn hàng hợp lệ, số tiền chi tiêu được tính theo công thức:
+
+2.3 Chu kỳ xét duyệt thứ hạng
+
+ 
+
+Ví dụ: Nếu trong Chu kỳ 1 từ ngày 01/01/2025 đến 30/06/2025, bạn đã hoàn thành 10 đơn hàng và chi tiêu tổng cộng 4.000.000 VND trên TIKI, thì thứ hạng khởi điểm của bạn trong Chu kỳ 2 năm 2025 (từ 01/07/2025 đến 31/12/2025) sẽ là Kim Cương.
+
+III. Quyền lợi của hạng thành viên
+3.1 Ưu đãi của mỗi thứ hạng
+
+3.2. Điểm TikiVIP là gì? 
+
+Điểm TikiVIP được xem là điểm thưởng được dùng riêng biệt trên nền tảng thương mại điện tử Tiki dành cho khách hàng thân thiết.
+
+Khách hàng sẽ được hoàn lại một phần số tiền đã chi tiêu thông qua các ưu đãi Hoàn Điểm TikiVIP. Trong đó, mỗi 1 đơn vị Điểm TikiVIP có giá trị thanh toán tương đương 1 VNĐ và có thể được sử dụng để hỗ trợ thanh toán cho các đơn hàng trên nền tảng thương mại điện tử Tiki. Khách hàng có thể sử dụng điểm thưởng để mua hàng và không được sử dụng quá 50% giá trị đơn hàng.
+
+Hình thức khuyến mãi: Tổ chức chương trình khách hàng thường xuyên.
+
+Thời gian khuyến mại: [*]
+
+Khách hàng có thể sử dụng điểm thưởng đồng thời với các ưu đãi khác theo thứ tự áp dụng như sau:
+
+- Chương trình khuyến mại
+
+- Điểm thưởng
+
+- Astra
+
+- Tiki Xu
+
+3.3. Cách tính và quy định về điểm TikiVIP
+
+Tùy theo thứ hạng của khách hàng thì sẽ nhận được mức hoàn điểm thưởng khác nhau và được hoàn tối đa 200K/tháng. Ngoài ra, chính sách hoàn điểm thưởng tuân thủ các quy định sau:
+
+- Điểm thưởng tính trên giá trị đơn hàng mà khách hàng thanh toán (bao gồm cả phí ship) sau khi trừ đi tất cả các chi phí khuyến mại và Tiki Xu.
+
+- Khi đơn hàng được giao thành công, lượng điểm thưởng được hoàn tính tại thời điểm đơn hàng được đặt.
+
+- Điểm thưởng sẽ được hoàn cho khách hàng sau khi đơn hàng giao thành công. Thời gian hoàn điểm thưởng là T = 24h tính từ thời điểm giao hàng thành công.
+
+(Lưu ý: Điểm thưởng không được hoàn cho các hạng mục sau: dịch vụ, thẻ cào, thẻ game… như được nêu tại Mục số 2.2 - Cách tính và quy định về đơn hàng.)
+
+Điểm TikiVIP có thời gian hết hạn. Dựa theo chính sách ban hành vào tháng 07/2025, thời gian hết hạn là 90 ngày, tính từ thời điểm phát sinh giao dịch hoàn điểm thưởng cuối cùng.
+
+Ví dụ: Một khách hàng nhận hoàn điểm thưởng vào ngày 1 tháng 1, thì thời gian hết hạn sẽ là 31/03, sang tháng 01/02 nếu phát sinh tiếp giao dịch hoàn điểm thưởng, thì thời hạn hết hạn sẽ được mở rộng tới 30/04. Giao dịch hoàn điểm thưởng khi đơn hàng giao thành công.
+
+ 
+
+3.4 Cách nhận ưu đãi của khách hàng thân thiết?
+
+? Hướng dẫn tham gia
+
+ 
+
+3.5 Thông tin chi tiết trang Quản lý hạng thành viên
+
+Tại trang Quản lý chi tiết hạng thành viên, bạn có thể thấy tổng hợp chi tiết về thứ hạng và quyền lợi của mình:
+
+Hạng thành viên 
+
+Số đơn trong kỳ và tiêu chí về số đơn cho hạng cho kỳ tiếp theo
+
+Chi tiêu trong kỳ và mức chi tiêu để có thể lên hạng cho kỳ tiếp theo
+
+Màu thẻ hạng thành viên sẽ thay đổi tuỳ theo thứ hạng
+
+Mỗi hạng sẽ hiển thị số đơn, tổng chi tiêu và các quyền lợi đi kèm. Với ưu đãi sinh nhật từ hạng Kim Cương, sẽ có đường dẫn cập nhật ngày sinh (Tiki khuyến khích bạn cập nhật sớm ngay hôm nay tại đây để không bỏ lỡ quà tặng)
+
+Từ trang chi tiết hạng thành viên, bạn bấm vào hạng thành viên, sẽ chuyển đến trang chi tiết về lịch sử mua sắm để kiểm tra danh sách đơn hàng, tổng số đơn, tổng số tiền, chu kỳ tính, và thời gian dữ liệu được cập nhật
+
+❓Các câu hỏi thường gặp
+
+Làm thế nào để lên hạng Vàng hoặc Kim Cương?
+
+Vàng: Đạt ít nhất 3 đơn hàng và chi tiêu từ 1,000,000 VND trong kỳ xét hạng.
+Kim Cương: Đạt ít nhất 10 đơn hàng và chi tiêu từ 4,000,000 VND trong kỳ xét hạng.
+
+Loại đơn hàng nào sẽ không được tính vào tổng chi tiêu và số đơn để xét hạng?
+
+Đơn hàng Dịch vụ tiện ích, Voucher & Dịch vụ
+Đơn hàng nạp ngân sách TIKI Ads.
+Đơn hàng vi phạm chính sách của TIKI.
+Đơn hàng sản phẩm sữa cho trẻ dưới 24 tháng tuổi, bia rượu, dịch vụ, thẻ cào, thẻ game và các hàng hóa, dịch vụ khác không được khuyến mại theo quy định của pháp luật.
+Đơn hàng giao không thành công hoặc đơn hàng trả hàng, hoàn tiền. (Lưu ý: Trong trường hợp đơn hàng bị hủy hoặc khách hàng yêu cầu trả hàng/hoàn tiền, giá trị đơn hàng, chi tiêu từ đơn hàng này sẽ bị trừ khỏi số tích lũy trước đó).
+
+Kiểm tra hạng hiện tại ở đâu?
+
+Website Tiki.vn: Bạn có thể kiểm tra tại mục Tiki VIP bên cạnh mục Tài khoản hoặc vào mục Tài khoản ⇒ Tiki VIP
+App Tiki.vn: Tại trang Tài khoản, thứ hạng được hiển thị ở dưới tên và cạnh ảnh đại diện
+
+Nếu đơn hàng thanh toán bằng Tiki Xu từ phiếu quà tặng thì có được tính vào tổng số giá trị chi tiêu hợp lệ không?
+
+Giá trị đơn hàng thanh toán bằng Tiki Xu vẫn được tích lũy để xét duyệt thứ hạng.
+
+Nếu tôi đạt đủ điều kiện nâng hạng (10 đơn hàng giao thành công và tổng chi tiêu 4 triệu đồng) trong khoảng 1/7/2025 – 1/9/2025, thì Tiki sẽ nâng hạng lên Kim Cương ngay lập tức hay tôi phải đợi đến kỳ xét duyệt tiếp theo (01/01/2026)? Nếu được nâng ngay, hạng Kim Cương sẽ có hiệu lực đến bao giờ?
+
+Nếu 01/09/2025, bạn chạm mốc 10 đơn hàng giao thành công và chi tiêu hợp lệ từ 4,000,000 VNĐ, bạn sẽ được nâng hạng Kim Cương vào ngày 02/09/2025. Hạng thành viên sẽ được duy trì đến hết chu kỳ hiện tại 31/12/2025, nếu không có đơn hàng bị hủy hoặc trả hàng hoàn tiền.
+Nếu ngày 03/09/2025 bạn phát sinh đơn hủy/trả hàng hoàn tiền dẫn đến bạn không còn đủ điều kiện Kim Cương, hệ thống sẽ tự động điều chỉnh lại hạng phù hợp, dựa trên tổng số đơn và giá trị chi tiêu tích lũy từ đầu chu kỳ.
+Lưu ý: Hạng trong chu kỳ này không thấp hơn hạng bạn đạt được ở chu kỳ trước. Ví dụ: nếu bạn bắt đầu chu kỳ với hạng Vàng, thì trong suốt chu kỳ hiện tại, hạng thấp nhất của bạn vẫn là Vàng.
+
+Ưu đãi sinh nhật áp dụng như thế nào?
+Khi bạn đạt từ hạng Kim Cương và có ngày sinh nhật đã cập nhật trong hồ sơ cá nhân, Tiki sẽ gửi mã ưu đãi trong tháng sinh nhật. ? Hãy chắc chắn rằng bạn đã Cập nhật ngày sinh
+ 
+
+Làm sao để không bị hạ hạng?
+Bạn cần duy trì tối thiểu số đơn hàng và mức chi tiêu tương ứng với hạng hiện tại mỗi chu kỳ (6 tháng). Nếu không đạt, hệ thống sẽ điều chỉnh hạng theo thực tế ở chu kỳ tiếp theo. Việc khởi động lại chu kỳ sẽ diễn ra vào 2 mốc thời gian quan trọng: 01/01 và 01/07 hàng năm.
+ 
+
+Điểm TikiVIP là gì và được sử dụng như thế nào khi mua hàng trên Tiki?
+
+Điểm TikiVIP ra mắt vào ngày 13/1/2026 được xem là điểm thưởng được dùng riêng biệt trên nền tảng thương mại điện tử Tiki dành cho khách hàng thân thiết. Khách hàng sẽ được hoàn lại một phần số tiền đã chi tiêu thông qua các ưu đãi Hoàn Điểm TikiVIP. Trong đó, mỗi 1 đơn vị Điểm TikiVIP có giá trị thanh toán tương đương 1 VNĐ và có thể được sử dụng để hỗ trợ thanh toán cho các đơn hàng trên nền tảng thương mại điện tử Tiki. Khách hàng có thể sử dụng điểm thưởng để mua hàng và không được sử dụng quá 50% giá trị đơn hàng.
+
+Điểm TikiVIP được tính và hoàn vào thời điểm nào sau khi đơn hàng giao thành công?
+
+Điểm thưởng sẽ được hoàn cho khách hàng sau khi đơn hàng giao thành công. Thời gian hoàn điểm thưởng là T = 24h tính từ thời điểm giao hàng thành công.
+
+Giá trị quy đổi của Điểm TikiVIP là bao nhiêu và có giới hạn khi thanh toán đơn hàng không?
+
+Mỗi 1 Điểm TikiVIP tương đương 1 VNĐ và chỉ được sử dụng tối đa 50% giá trị của mỗi đơn hàng.
+
+Điểm TikiVIP có thời hạn sử dụng bao lâu và được gia hạn trong những trường hợp nào?
+
+Điểm TikiVIP có thời hạn 90 ngày kể từ giao dịch hoàn điểm gần nhất và sẽ được gia hạn nếu khách hàng phát sinh thêm giao dịch hoàn điểm mới.
+
+Điểm TikiVIP được hoàn tối đa bao nhiêu mỗi tháng?
+
+Hoàn tối đa 200K/tháng.
+
+Điều khoản và Điều kiện của Chương trình Khách hàng thân thiết Tiki VIP?
+
+Bạn có thể tham khảo thêm các thông tin khác bao gồm Điều khoản & Điều kiện của Chương trình Khách hàng thân thiết Tiki VIP tại https://tiki.vn/thong-tin/tikivip-chuong-trinh-khach-hang-than-thiet
+
+Vì sao trang sản phẩm hiển thị giá ưu đãi từ mã VIP nhưng khi tôi thêm vào giỏ hàng và thanh toán giá lại cao hơn?
+
+Giá hiển thị trên trang sản phẩm là mức giá ưu đãi tốt nhất khi có áp dụng mã giảm giá VIP. Tuy nhiên, các mã giảm giá VIP có giới hạn lượt sử dụng. Nếu tài khoản của bạn đã dùng hết lượt các mã này hoặc không còn mã phù hợp, sản phẩm sẽ được tính theo giá gốc khi thanh toán.
+
+ 
+
+ 8Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

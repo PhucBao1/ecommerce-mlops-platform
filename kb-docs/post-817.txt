@@ -1,0 +1,111 @@
+# Chương trình hoàn xu và chia sẻ có lời
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/817
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Dịch vụ và Chương trình / Chương Trình Chia sẻ có lời
+ Chương trình hoàn xu và chia sẻ có lời
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 82
+
+⭕CHƯƠNG TRÌNH HOÀN XU
+
+1. Chương trình hoàn xu là gì?
+
+Hoàn xu là chương trình hỗ trợ quý khách khi mua sắm trên chuyên mục “Ưu đãi Affiliate” - nơi tổng hợp các sản phẩm có tài trợ từ Thương hiệu/Nhà bán: https://tiki.vn/tong-hop-uu-dai-affiliate sẽ được hoàn một số lượng xu hợp lệ.
+
+
+
+ 
+
+
+
+
+2. Các quy định chung của chương trình:
+
+- Khách hàng vào trang https://tiki.vn/tong-hop-uu-dai-affiliate , nhấp vào ô “Săn xxx xu” sau đó thực hiện đặt hàng và thanh toán và đơn giao thành công, khách hàng sẽ được hoàn xu
+- Số xu hiển thị ở ô “săn xu” là số xu ước tính, số xu thực tế được hoàn sẽ được tính dựa trên giá trị đơn hàng thực tế mà khách hàng thanh toán thành công sau khi trừ giá trị của coupon khuyến mãi mà khách hàng đã áp dụng 
+- Thời gian hoàn xu: trong vòng 30 ngày sau khi đơn hàng được giao thành công
+- Trường hợp không hợp lệ (không được hoàn xu): đơn hàng bị hủy hoặc đổi trả, khách hàng không nhận hàng, đơn hàng giao không thành công
+- Chỉ những sản phẩm xuất hiện trên trang https://tiki.vn/tong-hop-uu-dai-affiliate và có ô “Săn xxx xu” mới được hoàn xu
+
+
+
+⭕CHƯƠNG TRÌNH CHIA SẺ CÓ LỜI
+
+1. Chương trình chia sẻ có lời là gì?
+
+- “Chia sẻ có lời” là chương trình giúp quý khách lan tỏa và chia sẻ trải nghiệm mua sắm trên Tiki cùng gia đình và bạn bè, từ đó tạo thêm lợi ích tiết kiệm khi mua sắm trên Tiki.
+- Chỉ cần chia sẻ link mua hàng, quý khách sẽ được thưởng Tiki Xu tùy theo giá trị đơn hàng, khi có phát sinh từ link của quý khách và được giao thành công.
+- Thông tin các sản phẩm áp dụng được tổng hợp tại link https://tiki.vn/tong-hop-uu-dai-affiliate
+
+
+
+ 
+
+
+
+2. Các quy định chung của chương trình:
+
+- Tài khoản quý khách có ít nhất một đơn hàng giao thành công và không phát sinh hủy trả đều có thể tham gia (người chia sẻ)
+- Người chia sẻ sẽ được tặng một khoản Tiki Xu tùy theo món hàng và giá trị đơn hàng khi link chia sẻ của họ phát sinh đơn hàng được giao thành công.
+- Tiki Xu được gửi vào tài khoản người chia sẻ trong 30 ngày sau khi đơn hàng hợp lệ được giao thành công và không phát sinh hủy trả. Quy tắc ghi nhận đơn hàng:
+
+Đơn hàng đầu tiên, phát sinh trên link người chia sẻ, theo quy tắc cú click cuối cùng trong vòng 3 ngày sau khi được click vào.
+Không phát sinh đơn từ chính tài khoản chia sẻ.
+
+
+
+⭕CÁC CÂU HỎI THƯỜNG GẶP
+
+HỎI: Chương trình Hoàn xu và Chia sẻ có lời có giống nhau không?
+
+TRẢ LỜI: Chương trình Hoàn xu và Chia sẻ có lời không giống nhau :
+- Chia sẻ có lời hoạt động theo nguyên tắc của Affiliate Marketing: Khách hàng chia sẻ link cho người khác => người được chia sẻ mua hàng bằng cách nhấp vào link của người chia sẻ => phát sinh đơn & giao thành công => người chia sẻ được hoàn xu (theo luật ghi nhận của Chia sẻ có lời)
+- Chương trình Hoàn xu hoạt động thuần theo hình thức hoàn xu khi quý khách mua hàng trên trang Ưu đãi https://tiki.vn/tong-hop-uu-dai-affiliate, người được hoàn xu là người thực sự mua hàng trên trang này (không theo luật ghi nhận của Chia sẻ có lời), quý khách chỉ cần truy cập trang Ưu đãi, thực hiện mua hàng và nhận hàng thành công thì được hoàn xu.
+
+
+
+HỎI: Tôi kiểm tra ở đâu để biết mình được hoàn bao nhiêu đối với đơn hàng của mình?
+
+TRẢ LỜI: Vì số xu thể hiện trên trang Ưu đãi là số ước tính, số xu thực nhận sẽ được tính dựa vào tỷ lệ % của giá trị thực của đơn hàng mà quý khách đã thanh toán. Quý khách có thể kiểm tra trong mục "Chia sẻ có lời" tại phần "Thông tin tài khoản" hoặc tại link https://tiki.vn/chia-se-co-loi 
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.         
+
+ 
+
+ 
+
+ 
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

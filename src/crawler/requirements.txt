@@ -1,0 +1,15 @@
+# ===== Core dependencies =====
+requests==2.31.0         # Gửi HTTP requests
+pandas==2.1.0            # Xử lý dữ liệu, export Parquet
+numpy<2.0.0              # Ép numpy về bản 1.x
+tqdm==4.66.1             # Thanh tiến trình khi crawl
+urllib3==1.26.18         # Retry logic & HTTP utilities
+
+# ===== Parquet & S3/MinIO =====
+pyarrow==12.0.1
+boto3==1.28.17           # KHOÁ CHẶT BẢN NÀY ĐỂ KHỚP VỚI S3FS
+s3fs==2023.9.2
+fsspec==2023.9.2
+
+# ===== Optional utils =====
+wheel==0.41.2            # Hỗ trợ cài các gói C-extension

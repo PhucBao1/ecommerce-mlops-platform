@@ -1,0 +1,187 @@
+# Phí lắp đặt của Tiki
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/781
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Dịch vụ và Chương trình / Dịch Vụ Lắp Đặt
+ Phí lắp đặt của Tiki
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 102
+
+Phí lắp đặt sẽ bao gồm công lắp đặt và một số chi phí vật tư khác.
+
+- Công lắp đặt: đã được tính vào giá trị đơn hàng khi quý khách lựa chọn các sản phẩm có hỗ trợ lắp đặt và có chọn gói lắp đặt.
+
+- Phí vật tư: nhân viên lắp đặt sẽ thông báo về chi phí vật tư cộng thêm trực tiếp dựa trên địa hình, vị trí lắp đặt. Quý khách sẽ thanh toán chi phí này trực tiếp với nhân viên sau khi thỏa thuận.
+ 
+
+BẢNG GIÁ CÔNG LẮP ĐẶT VÀ VẬT TƯ THAM KHẢO
+ 
+
+1. Bảng giá cung cấp dịch vụ công lắp đặt tham khảo:
+ 
+
+Ngành hàng	TikiNOW 2h-3h
+(Lắp đặt 2h sau khi giao (*))	Giao hàng tiêu chuẩn
+(Lắp đặt 48h sau khi giao)
+Máy giặt	170.000	60.000
+Máy sấy quần áo	170.000	60.000
+Máy lạnh- Máy điều hòa	430.000	200.000
+Máy nước nóng	190.000	80.000
+Tivi	170.000	60.000
+Máy rửa chén	170.000	60.000
+Máy lọc nước	260,000	 
+Bếp âm	130.000	 
+Lò âm	130.000	 
+Máy hút khói, khử mùi	170.000	 
+Quạt trần	170.000	 
+Ngoại thất sân vườn	130.000	95.000
+Nội thất trẻ em	 130.000  	95.000
+Nội thất phòng học, làm việc	130.000  	95.000
+Nội thất phòng ăn	130.000  	95.000
+Nội thất phòng khách	140.000  	95.000
+Nội thất phòng ngủ	205.000	140.000
+Tủ lạnh	150.000	60.000
+Tủ đông - tủ mát	150.000	60.000
+
+ 
+
+⚠️Lưu ý
+
+- Về việc lắp đặt các loại bếp: Phí bao gồm dịch vụ lắp đặt, Tiki chưa hỗ trợ cắt đá cho KH.
+
+- Về việc lắp quạt trần: Tiki chỉ có thể hỗ trợ lắp đặt khi nhà khách hàng đã có sẵn ti treo và nếu độ cao lắp trên 5m thì khách hàng sẽ cần tự thuê giàn giáo. Bên cạnh đó, việc lắp đặt quạt trần còn một số điều kiện như:
+
+1. Tối thiểu khoảng cách từ cánh quạt xuống đất từ 2,5m trở lên mới đủ an toàn, để đảm bảo nhất là từ 2m8.
+2. Nhà khách cần có móc treo sẵn trên trần.
+3. Để đảm bảo an toàn cho khách, Tiki xin phép không gắn quạt trên trần la phong/ thạch cao.
+ 
+
+2. Bảng giá vật tư lắp đặt tham khảo (chưa bao gồm VAT):
+
+( phí vật tư có thể thay đổi theo thời giá, loại vật tư )
+
+  STT  	 VẬT TƯ PHỤ	 ĐVT 	 Giá tiền 
+
+    1	 Ống đồng 6/10 đi nổi,  Thái Lan (Luvata)	 m	                 
+ 160,000
+    2	 Ống đồng 6/12 đi nổi, Thái Lan (Luvata)	 m	                 
+ 180,000
+    3	 Ống đồng 10/16 đi nổi, Thái Lan (Luvata)	 m	                 
+ 230,000
+    4	 Dây điện 1.5 mm2 daphaco/ Cadivi	 m
+ 9,000
+    5	 Dây điện 2.0 mm2 daphaco/ Cadivi	 m	                 
+ 11,000
+    6	 Dây điện 2.5 mm2 daphaco/ Cadivi	 m	                 
+ 14,000
+    7	 Ống thoát nước mềm	 m	 
+ 8,000
+    8	 PVC 21 Bình Minh + Móc đóng ống	 m
+ 20,000
+    9	 PVC 27 Bình Minh + Móc đóng ống	 m
+ 25,000
+   10	 Co T, lơ, măng xông PVC 21	 cái
+ 6,000
+   11	 Co T,lơ, măng xông PVC 27	 cái
+ 8,000
+   12	 Giá treo ĐH (Eke) 1 - 2 ngựa	 bộ
+ 80,000
+   13	 Giá treo ĐH (Eke) 2 - 2.5 ngựa	 bộ
+ 100,000
+   14	 CB 20A+ Hộp – Sino/ LG/ tương đương	 cái	                   
+ 80,000
+   15	 CB 30A+ Hộp – Sino/ LG/ tương đương	 cái
+ 80,000
+   16	 Đối với trường hợp khách mua vật tư sẵn trước:Công bọc, đi ống điều hòa(m)  	 m
+ 30,000
+   17	 Bass treo tivi loại áp tường 32’’-46’’	 cái
+ 150,000
+   18	Bass treo tivi loại áp tường 49’’-65’’	 cái
+ 180,000
+   19	 Đầu nối thẳng răng ngoài 21 kết nối với dây cấp nước của máy giặt	 cái	                   
+ 30,000
+   20	 T Cầu	 cái	               
+ 60,000
+   21	 Hàn ống đồng	 mối	                   
+ 30,000
+   22	 Vệ sinh đường ống( chỉ vệ sinh đường ống củ)	 bộ
+ 300,000
+   23	 Vật tư phụ (ốc vít, bột trám trét, tắtkê), không bao gồm sơn lại nhà	 lần	                   
+ 30,000
+   24	 Dây cấp nước 3 tấc	 cái	                   
+ 30,000
+   25	 Dây cấp nước 6 tấc	 cái	                 
+ 80,000
+   26	 Dây cấp nước 6 tấc đến 1,2m	 cái
+ 120,000
+   27	 Bộ treo ti máy nước nóng gián tiếp	 cái	                   
+ 150,000
+   28	 Dây điện tiếp địa Daphaco	 m	                   
+ 7,000
+   29	 Chân đế cao su máy lạnh	 bộ	                    
+ 60,000
+   30	 Van Khóa Nước Ø (đường kính) 21-27 mm(nhựa) Bình Minh	 cái	                   
+ 50,000
+   31	 Van Khóa Nước Ø (đường kính) 21-27 mm(đồng) Bình Minh	 cái	                 
+ 80,000
+   32	 Công đi ống âm	 m	                   
+ 50,000
+   33	 Dây cáp Tivi	 m	                   
+ 10,000
+   34	 Nẹp nhựa bảo vệ dây điện	 cây	                 
+ 20,000
+   35	 Đầu nối cáp	 đầu	                 
+ 180,000
+   36	 Công tháo gỡ máy lạnh	 máy
+ 150,000
+   37	 Y chia đường nước xả	 m	     
+  20,000
+   38	 Dây cấp nước 1m5-2m	 m	              
+ 150,000
+   39	 Dây cấp nước 3m	 m	 
+ 180,000
+   40	 Dây cấp nước 5m	 m
+ 220,000
+   41	 Co inox	 cái
+ 150,000
+   42	 T cầu có khóa	 cái
+ 180,000
+   43	 Ống nước xả ruột mềm(máy giặt)	 cái
+ 20,000
+   44	 Băng keo lụa	 cuộn
+ 7,000
+   45	 Công bảo dưỡng máy lạnh/ Vệ sinh máy lạnh	 máy
+ 150,000
+
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng. 
+
+ 
+
+ 
+
+ 
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

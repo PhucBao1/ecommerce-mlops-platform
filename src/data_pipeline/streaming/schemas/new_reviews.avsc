@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "name": "NewReview",
+  "namespace": "com.ecommerce.streaming",
+  "doc": "User product review event from crawler or API",
+  "fields": [
+    {"name": "review_id",    "type": "string",           "doc": "Unique review identifier"},
+    {"name": "product_id",   "type": "string",           "doc": "Product being reviewed"},
+    {"name": "customer_id",  "type": "string",           "doc": "Reviewer customer ID"},
+    {"name": "rating",       "type": "int",              "doc": "Star rating 1-5"},
+    {"name": "review_text",  "type": ["null", "string"], "default": null, "doc": "Review body text (Vietnamese)"},
+    {"name": "ts",           "type": "long",             "doc": "Unix timestamp (seconds) when review was submitted"},
+    {"name": "source",       "type": ["null", "string"], "default": null, "doc": "Origin: crawler | api | import"},
+    {"name": "sentiment",    "type": ["null", "float"],  "default": null, "doc": "Pre-computed sentiment score (-1 to 1)"}
+  ]
+}

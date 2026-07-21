@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nlp-api
+  labels:
+    app: nlp-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nlp-api
+  template:
+    metadata:
+      labels:
+        app: nlp-api
+    spec:
+      containers:
+        - name: nlp-api
+          image: <ECR_URL>/phobert-api:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REDIS_HOST
+              value: redis-service
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://jaeger:4317
+            # NLP_API_KEY: cố tình không set giá trị plaintext ở đây (xem
+            # P2-9 — secret staging từng bị commit dạng plaintext). Auth
+            # tắt cho tới khi biến này được inject qua Secret lúc deploy
+            # thật, không phải hardcode trong file yaml checked-in.
+          resources:
+            requests:
+              cpu: "1000m"
+              memory: "2Gi"
+            limits:
+              cpu: "4000m"
+              memory: "8Gi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 90
+            periodSeconds: 30

@@ -1,0 +1,31 @@
+ecommerce_absa:
+  # Chữ 'target' này quy định: Nếu không nói gì, mặc định sẽ chạy cấu hình 'local_test'
+  target: local_test
+
+  outputs:
+    # ==========================================
+    # 1. CẤU HÌNH CHO MÁY CỦA BẠN (TEST LOCAL)
+    # ==========================================
+    local_test:
+      type: spark
+      method: thrift
+      host: localhost       # <--- Chạy trên máy Host
+      port: 10000
+      catalog: lakehouse
+      schema: gold
+      auth: NONE
+      threads: 4
+
+    # ==========================================
+    # 2. CẤU HÌNH CHO AIRFLOW (CHẠY TRONG DOCKER)
+    # ==========================================
+    prod_airflow:
+      type: spark
+      method: thrift
+      host: spark-dbt-thrift # <--- Gọi nhau trong mạng Docker
+      port: 10000
+      user: root
+      catalog: lakehouse
+      schema: gold
+      auth: NONE
+      threads: 4

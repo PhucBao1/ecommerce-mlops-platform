@@ -1,0 +1,80 @@
+# Thanh toán không tiếp xúc trên thẻ TikiCARD như thế nào?
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/919
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Dịch vụ và Chương trình / Thẻ Đồng Thương Hiệu
+ Thanh toán không tiếp xúc trên thẻ TikiCARD như thế nào?
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 35
+
+1. Công nghệ thanh toán không tiếp xúc là gì?
+ 
+
+Công nghệ thanh toán không tiếp xúc cho phép chủ thẻ không cần quẹt thẻ, chỉ cần chạm thẻ ngay trước thiết bị thanh toán tại quầy thu ngân và giao dịch sẽ được thực hiện.
+Khi được hiển thị trên thẻ, biểu tượng thanh toán không tiếp xúc có nghĩa là thẻ có khả năng thanh toán không tiếp xúc.
+Biểu tượng thanh toán không tiếp xúc là vị trí để chạm thẻ hoặc thiết bị hỗ trợ thanh toán không tiếp xúc lên thiết bị đọc thẻ thanh toán.
+
+
+2. Cách nhận biết thẻ hỗ trợ chức năng thanh toán không tiếp xúc
+
+
+Biểu tượng thanh toán không tiếp xúc được in trên mặt trước của Thẻ tín dụng Sacombank Tiki Platinum.
+
+  
+
+3. Cách sử dụng chức năng thanh toán không tiếp xúc
+
+Thẻ TikiCARD chỉ cần để gần biểu tượng thanh toán không tiếp xúc trên thiết bị đọc thẻ trong khoảng cách từ 1cm đến 1.5cm hoặc chạm trực tiếp trên thiết bị đọc thẻ.
+ 
+
+4. Lợi ích của thanh toán không tiếp xúc trên Thẻ tín dụng TikiCARD
+
+Chức năng thanh toán không tiếp xúc hỗ trợ việc thanh toán nhanh chóng và đơn giản hơn:
+- Chỉ cần CHẠM hoặc vẫy nhẹ thẻ Sacombank lên POS để thanh toán.
+- Không cần ký tên lên hóa đơn mua hàng có giá trị nhỏ (từ 1.000.000 VND trở xuống).
+- An tâm vì giao dịch thanh toán vẫn được bảo mật tối đa.
+ 
+
+5. Khách hàng có cần kích hoạt tính năng thanh toán không tiếp xúc?
+
+Tính năng thanh toán không tiếp xúc sẽ được kích hoạt cùng với việc khách hàng kích hoạt thẻ vật lý.
+
+⚠️Lưu ý: Trạng thái kích hoạt thẻ của quý khách đã được thực hiện khi quý khách kích hoạt thẻ trên Tiki.
+Việc nhắn tin theo cú pháp quy định khi nhận thẻ vật lý chỉ là để mở rộng phạm vi giao dịch của thẻ gồm cả trực tuyến và giao dịch tại POS, không phải để kích hoạt thẻ vì thẻ đã được kích hoạt sử dụng trên Tiki trước đó.
+
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.           
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

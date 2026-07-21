@@ -1,0 +1,131 @@
+# NGON - ĐI CHỢ ONLINE
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/1036
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Dịch vụ và Chương trình / Khác
+ NGON - ĐI CHỢ ONLINE
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 45
+
+
+
+
+
+Để mang đến cho quý khách nhiều sự trải nghiệm tiện lợi khi mua sắm trực tuyến, hiện Tiki triển khai dịch vụ NGON, cung cấp các loại thực phẩm tươi sống để phục vụ nhu cầu mua sắm của quý khách như sau:
+
+Các loại thực phẩm tươi sống như thịt, hải sản, trứng, rau, củ, quả;
+Các loại thực phẩm đông lạnh hoặc thực phẩm được đóng gói sẵn (cafe, trà, …);
+Các loại thực phẩm chức năng, thuốc, sản phẩm chăm sóc sức khỏe hoặc đồ dùng thiết yếu khác;
+Hoa tươi hoặc hoa trang trí các loại.
+
+
+1. Tiki có cung cấp thực phẩm tươi sống trên toàn quốc đúng không?
+
+Tiki hiện đang phục vụ giao hàng thực phẩm tươi sống tại khu vực thành phố Hồ Chí Minh, Hà Nội và sẽ tiếp tục triển khai ở các khu vực khác trong thời gian sắp tới.
+
+
+2. Tôi có thể thêm/ bớt sản phẩm sau khi đã đặt hàng thành công không?
+
+Quý khách có thể chủ động trao đổi với nhà bán/ nhà cung cấp để điều chỉnh giảm bớt sản phẩm theo mong muốn khi nhà cung cấp liên hệ xác nhận đơn hàng. 
+Trường hợp quý khách muốn mua thêm sản phẩm, xin vui lòng đặt đơn hàng mới. Tiki rất tiếc chưa hỗ trợ quý khách thêm sản phẩm vào đơn hàng đã đặt.
+
+⚠️Lưu ý: Tiki chỉ chịu trách nhiệm hỗ trợ cho các sản phẩm trong đơn hàng được đặt tại Tiki.vn.
+
+
+3. Thời gian giao hàng của Tiki đối với thực phẩm tươi sống là bao lâu?
+
+Thời gian giao hàng của Tiki đối với các đơn hàng thực phẩm tươi sống được áp dụng như sau:
+
+Đơn hàng đặt trong khoảng từ 8h đến 17h: được giao trong cùng ngày và không quá 3h kể từ lúc đơn hàng được xác nhận thành công.
+Đơn hàng đặt sau 17h: được giao trước 11h ngày hôm sau.
+
+
+Quý khách vui lòng kiểm tra thời gian giao hàng dự kiến tại bước "Thanh toán".
+
+
+
+4. Tôi có thể yêu cầu thời gian giao hàng được không?
+
+Quý khách có thể thỏa thuận về thời gian giao hàng khi nhà cung cấp liên hệ xác nhận đơn hàng.
+
+
+
+5. Tiki có liên hệ tôi trước khi giao hàng không?
+
+Đơn hàng thực phẩm tươi sống sẽ được nhà bán của Tiki liên hệ trực tiếp để xác định thời gian giao đến quý khách. 
+Tiki rất tiếc chưa hỗ trợ giao lại sau khi đơn hàng đã được xác nhận giao không thành công, đơn hàng giao không thành công sẽ được cập nhật hủy. Quý khách vui lòng đặt lại đơn hàng mới nếu vẫn còn nhu cầu sử dụng sản phẩm.
+
+
+
+6. Tôi muốn hủy đơn hàng đã đặt thì làm sao?
+
+Quý khách có thể yêu cầu hủy đơn hàng khi nhà bán liên hệ xác nhận đơn hàng hoặc từ chối nhận hàng khi nhân viên vận chuyển giao hàng đến. 
+
+
+7. Tôi có thể đổi địa chỉ giao hàng NGON không?
+
+Trước khi đơn hàng được xác nhận: Quý khách có thể thay đổi được địa chỉ và có thể trao đổi trực tiếp khi nhà cung cấp liên hệ xác nhận đơn hàng.
+Sau khi đơn hàng được xác nhận: Tiki rất tiếc chưa thể hỗ trợ thay đổi địa chỉ.
+
+
+
+8. Tôi có được kiểm tra sản phẩm đơn hàng ngay lúc nhận hàng không?
+
+Quý khách lưu ý kiểm tra sản phẩm ngay tại thời điểm nhận hàng. Nếu không hài lòng với sản phẩm được giao đến, quý khách vui lòng từ chối nhận hàng. 
+
+Đối với thực phẩm tươi sống: Tiki rất tiếc chưa hỗ trợ yêu cầu trả hàng hóa sau khi giao hàng thành công.
+Đối với thực phẩm khô: Tiki chỉ hỗ trợ yêu cầu trả sản phẩm lỗi trong 1 ngày kể từ thời điểm nhận hàng thành công.
+
+
+
+9. Tiki có hỗ trợ xuất hóa đơn với các sản phẩm NGON không?
+
+Quý khách sẽ được hỗ trợ xuất hóa đơn trong vòng 30 ngày kể từ thời điểm nhận hàng thành công và không phát sinh nhu cầu đổi trả. Một số nhà bán cá nhân chưa hỗ trợ xuất hóa đơn. 
+
+Đối với sản phẩm do nhà bán TikiNGON cung cấp, quý khách sẽ nhận được hóa đơn điện tử được gửi kèm trong mail có tiêu đề "Hóa đơn điện tử của đơn hàng [Mã đơn hàng]". Quý khách vui lòng nhận hóa đơn bằng cách tải file đính kèm và mở file trực tiếp từ thư mục đã tải về máy. Nếu quý khách không nhập thông tin xuất hóa đơn nhà bán TikiNGON sẽ mặc định xuất hóa đơn theo thông tin cá nhân của người nhận hàng.
+
+
+
+10. Khi mua các sản phẩm NGON tôi có được đổi trả không?
+Đối với các sản phẩm tươi sống, nếu giao đến bị hư hỏng/ không đảm bảo chất lượng/ giao sai sản phẩm hoặc số lượng, quý khách có thể từ chối tại thời điểm nhận hàng. Tiki rất tiếc chưa hỗ trợ hoàn tiền nếu quý khách đã nhận hàng.
+Đối với các sản phẩm thực phẩm khô, quý khách cần thông báo đến Tiki trong vòng 1 ngày kể từ khi giao hàng thành công. Yêu cầu trả hàng hoàn tiền chỉ được chấp nhận trong trường hợp sản phẩm hư hỏng do nhà sản xuất/ không đảm bảo chất lượng/ giao sai sản phẩm hoặc sai số lượng. Trong trường hợp sản phẩm được hỗ trợ trả, nhà bán hàng sẽ thu hồi và thỏa thuận phương án hỗ trợ với quý khách. Tiki rất tiếc chưa hỗ trợ đổi mới khi sản phẩm phát sinh hư hỏng.
+Lưu ý: Tiki chỉ chịu trách nhiệm hỗ trợ cho các sản phẩm trong đơn hàng được đặt tại Tiki.vn.
+
+
+
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.          
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

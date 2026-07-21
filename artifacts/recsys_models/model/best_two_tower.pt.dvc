@@ -1,0 +1,5 @@
+outs:
+- md5: e6c48f818568285b25a9878acacf5d00
+  size: 7871481
+  hash: md5
+  path: best_two_tower.pt

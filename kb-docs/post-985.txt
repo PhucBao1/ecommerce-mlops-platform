@@ -1,0 +1,59 @@
+# Làm thế nào để tôi xóa tài khoản đặt hàng tại Tiki?
+
+Nguồn: https://hotro.tiki.vn/knowledge-base/post/985
+
+TIKI 1900 6035 hotro@tiki.vn
+GỬI YÊU CẦU
+Trang chủ/Kho kiến thức/ Tài khoản của tôi / Quản lý tài khoản
+ Làm thế nào để tôi xóa tài khoản đặt hàng tại Tiki?
+
+ Cập nhật lần cuối: 1 năm trước
+Lượt xem: 116
+
+Rất tiếc khi quý khách xóa tài khoản, để thao tác quý khách có thể thực hiện các bước như sau tại ứng dụng Tiki:
+
+
+Bước 1: Đặng nhập vào tài khoản Tiki, chọn mục "Tài khoản" > "Cài đặt" (biểu tượng ⚙).
+
+Bước 2: Chọn "Yêu cầu xóa tài khoản" > Đọc kỹ các thông tin quan trọng liên quan đến việc hủy tài khoản Tiki.
+
+Bước 3: Chọn xác nhận "Tôi chắc chắn muốn xóa tài khoản Tiki" > bấm "Gửi".
+
+Bước 4: Nhập mã xác minh được gửi qua SMS/ email.
+ 
+
+
+
+
+⚠️Lưu ý:
+- Việc xóa tài khoản chỉ được hỗ trợ qua App Tiki.
+- Người dùng phải hoàn thành tất cả đơn hàng trước khi yêu cầu xóa tài khoản.
+- Tài khoản sau khi xóa sẽ không thể khôi phục, quý khách không thể đăng nhập lại vào tài khoản đã xóa thành công.
+- Quý khách sẽ mất toàn bộ số Tiki Xu, Astra, Bookcare đang có trong tài khoản. 
+- Số điện thoại và email liên kết với tài khoản đã xóa sẽ không thể dùng để đăng ký tài khoản mới hoặc liên kết tài khoản khác.
+- Nếu tài khoản của quý khách dùng để đăng nhập vào Seller Center, quý khách sẽ không thể dùng để đăng nhập được nữa.
+ 
+
+Nếu cần thêm sự hỗ trợ, quý khách vui lòng liên hệ tới Tiki qua kênh hỗ trợ chính thống:
+
+Hotline 19006035 (8h – 21h tất cả các ngày trong tuần).
+Chat với trợ lý cá nhân tại đây
+Gửi yêu cầu của quý khách tại đây
+Gửi email tới địa chỉ: hotro@tiki.vn hoặc support@tiki.vn.
+Website và Facebook Tiki có dấu (✓) xanh. 
+Kênh Zalo có biểu tượng dấu (✓) vàng.             
+
+     
+
+ 0Bài viết trên có hữu ích không?    Có   Không
+Công ty TNHH TI KI
+
+Địa chỉ cũ: 52 Út Tịch, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh, Việt Nam
+
+Địa chỉ mới: 208 Cô Bắc, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh, Việt Nam
+
+Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+
+Hotline: 1900 6035  (1000 đ/phút, 8-21h kể cả T7, CN)
+
+Quy chế hoạt động| Bán hàng cùng TIKI| TI KI Limited Company|

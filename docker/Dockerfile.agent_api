@@ -1,0 +1,47 @@
+# syntax=docker/dockerfile:1.4
+FROM python:3.10-slim AS base
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=0
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        gosu \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install grpcio binary wheel before requirements (avoids ~30min C++ compilation)
+RUN pip install --prefer-binary grpcio grpcio-tools
+
+RUN useradd --no-create-home --system --uid 1001 app
+
+WORKDIR /app
+
+# Requirements cached as separate layer — only rebuild when requirements.txt changes
+COPY src/serving/agent_api/requirements.txt .
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt
+
+COPY src/ src/
+
+# item_lookup.parquet is mounted at runtime via docker-compose volume
+# (excluded from build context by .dockerignore *.parquet rule)
+
+RUN chown -R app:app /app
+
+# entrypoint.sh chạy как root TRƯỚC (bắt buộc, vì volume bind-mount từ host được
+# gắn SAU build image — Docker tự tạo thư mục host chưa tồn tại với quyền root,
+# "RUN chown" lúc build không chạm tới được) để chown đúng các path bind-mount
+# (model_cache/*) về uid app, rồi mới hạ quyền qua gosu trước khi exec uvicorn.
+# Bug thật đã gặp: thiếu bước này làm agent-api crash "PermissionError" ngay khi
+# lần đầu container tạo thư mục model_cache trên host mới (chưa từng chạy).
+COPY docker/entrypoint.agent_api.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 8003
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8003/health')"
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["uvicorn", "src.serving.agent_api.main:app", "--host", "0.0.0.0", "--port", "8003"]

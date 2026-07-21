@@ -1,0 +1,179 @@
+version: 2
+
+models:
+  # ==========================================
+  # DIMENSION LAYER (REFERENCE TABLES)
+  # ==========================================
+  - name: dim_product
+    description: "The Dimension table stores information about products that are currently active."
+    columns:
+      - name: product_id
+        description: "The unique identifier of the product."
+        tests:
+          - unique
+          - not_null
+      - name: sku
+        description: "SKU code of the product."
+      - name: product_name
+        description: "Name of the product."
+      - name: brand_id
+        description: "Reference to brand dimension."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_brand')
+                field: brand_id
+      - name: category_id
+        description: "Reference to category dimension."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_category')
+                field: category_id
+
+  - name: dim_brand
+    description: "Stores brand information."
+    columns:
+      - name: brand_id
+        tests:
+          - unique
+          - not_null
+      - name: brand_name
+
+  - name: dim_seller
+    description: "Stores seller information."
+    columns:
+      - name: seller_id
+        tests:
+          - unique
+          - not_null
+      - name: seller_name
+      - name: seller_logo
+      - name: seller_link
+
+  - name: dim_category
+    description: "Stores category information."
+    columns:
+      - name: category_id
+        tests:
+          - unique
+          - not_null
+      - name: category_name
+
+  - name: dim_customer
+    description: "Stores customer information collected from reviews."
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+
+  - name: dim_date
+    description: "Stores dates and related attributes."
+    columns:
+      - name: date_id
+        tests:
+          - unique
+          - not_null
+      - name: full_date
+      - name: day
+      - name: month
+      - name: year
+      - name: quarter
+      - name: day_of_week
+
+  # ==========================================
+  # FACT LAYER (FACT TABLES / METRICS)
+  # ==========================================
+  - name: fact_review
+    description: "The Fact table stores the history of customer reviews for each product."
+    columns:
+      - name: review_id
+        description: "The primary key of the review."
+        tests:
+          - unique
+          - not_null
+
+      - name: product_id
+        description: "The foreign key referencing the dim_product table."
+        tests:
+          - not_null
+          # Ensure that no review belongs to a “ghost” product (i.e., a product that does not exist in the dim_product table).
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+
+      - name: customer_id
+        description: "The foreign key referencing the dim_customer table."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+
+      - name: rating
+        description: "The rating score ranges from 1 to 5 stars."
+        tests:
+          - not_null
+          # Ensure that the rating score is always valid and not corrupted by crawler errors, such as capturing letters or invalid numbers.
+          - accepted_values:
+              values: [1.0, 2.0, 3.0, 4.0, 5.0]
+
+      - name: comment
+      - name: sentiment_label
+      - name: model_version
+      - name: inference_time
+      - name: date_id
+        tests:
+          - not_null
+
+  - name: fact_product_snapshot_daily
+    description: "The Fact Snapshot table records daily changes in product price, inventory, and sales."
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+
+      - name: crawl_date
+        tests:
+          - not_null
+
+  # ==========================================
+  # GOLD LAYER (ML / ANALYTICS MARTS)
+  # ==========================================
+  - name: gold_rfm_segments
+    description: "RFM customer segmentation — Champion / Loyal / New Customer / At Risk."
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: segment
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Champion', 'Loyal', 'New Customer', 'At Risk']
+      - name: rfm_total
+        tests:
+          - not_null
+
+  - name: gold_ab_test_results
+    description: "A/B experiment CTR and purchase rate aggregated by group and date."
+    columns:
+      - name: experiment_group
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['experiment', 'control']
+      - name: date
+        tests:
+          - not_null

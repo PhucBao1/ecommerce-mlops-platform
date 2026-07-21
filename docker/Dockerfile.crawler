@@ -1,0 +1,16 @@
+# Dùng bản Python 3.10 siêu nhẹ
+FROM python:3.10-slim
+
+# Chuyển đến thư mục làm việc
+WORKDIR /opt/workspace
+
+# Copy toàn bộ code trong thư mục src của bạn vào image
+COPY ./src /opt/workspace/src
+
+# (Tùy chọn) Nếu Crawler của bạn có thư viện cần cài thì bỏ comment 2 dòng dưới
+COPY ./src/crawler/requirements.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Thiết lập mặc định
+ENV PYTHONPATH="/opt/workspace"
+CMD ["python"]

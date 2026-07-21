@@ -1,0 +1,29 @@
+# Dependencies tối thiểu để chạy tests/ trong CI.
+pytest
+pytest-asyncio
+
+# tracing.py
+prometheus-client
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp-proto-grpc
+
+# tools.py / security.py
+pydantic
+requests
+fastapi
+
+# guardrails.py, cost_guard.py, security.py (rate limit + budget + prompt registry)
+redis
+
+# graph.py — checkpointer (thread persistence) + summarization.
+# langgraph-checkpoint-redis cần RediSearch => CI phải dùng service container
+# redis-stack, không phải redis:alpine (xem ci_python_tests.yml).
+#
+langgraph
+langgraph-checkpoint-redis
+langchain-core
+langchain-anthropic
+langchain-ollama
+langchain-openai
+litellm

@@ -1,0 +1,147 @@
+services:
+  sentiment-api:
+      build:
+        context: .
+        dockerfile: src/serving/nlp_api/Dockerfile
+      # image: chỉ thật sự trỏ ECR khi ECR_REGISTRY được set trong .env (deploy AWS,
+      # CI/CD `docker compose pull` dùng field này) — local dev không set biến này
+      # thì fallback về tag cục bộ vô hại, `up --build` vẫn build từ context như cũ.
+      image: ${ECR_REGISTRY:-ecommerce-local}/sentiment-api:latest
+      container_name: sentiment-api
+      environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - NLP_API_KEY=${NLP_API_KEY:-}
+      ports:
+        - "8000:8000"
+      networks:
+        - data-network
+      restart: always
+
+  recsys-api:
+      build:
+        context: .
+        dockerfile: src/serving/recsys_api/Dockerfile
+      image: ${ECR_REGISTRY:-ecommerce-local}/recsys-api:latest
+      container_name: recsys-api
+      environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - TRUST_PROXY_HEADERS=${TRUST_PROXY_HEADERS:-false}
+      - RECSYS_RATE_LIMIT_PER_MIN=${RECSYS_RATE_LIMIT_PER_MIN:-60}
+      ports:
+        - "8001:8001"
+      networks:
+        - data-network
+      restart: always
+
+  recsys-consumer:
+    build:
+      context: .
+      dockerfile: src/data_pipeline/streaming/consumer/Dockerfile
+    image: ${ECR_REGISTRY:-ecommerce-local}/recsys-consumer:latest
+    container_name: recsys-consumer
+    environment:
+    - REDIS_HOST=${REDIS_HOST}
+    - REDIS_PORT=${REDIS_PORT}
+    - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      - data-network
+
+  recsys-producer:
+    build:
+      context: .
+      dockerfile: src/data_pipeline/streaming/producer/Dockerfile
+    image: ${ECR_REGISTRY:-ecommerce-local}/recsys-producer:latest
+    container_name: recsys-producer
+    ports:
+      - "8002:8002"
+    networks:
+      - data-network  # Phải trùng tên network với Spark/Airflow của bạn
+
+  ollama:
+    image: ollama/ollama:0.3.14
+    container_name: ollama
+    profiles: [agent]
+    volumes:
+      - ./model_cache/ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - data-network
+
+  # nginx-vllm — round-robin trước 2 replica GPU Spot (terraform/phase2/vllm.tf).
+  # Chỉ agent-api gọi tới (không publish port ra host) — 8080 nằm trong
+  # data-network nội bộ, đúng nguyên tắc "chỉ Instance A gọi vLLM" ở SG.
+  nginx-vllm:
+    image: nginx:1.27-alpine
+    container_name: nginx-vllm
+    profiles: [agent]
+    volumes:
+      - ./nginx/vllm.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - data-network
+    restart: unless-stopped
+
+  agent-api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.agent_api
+    image: ${ECR_REGISTRY:-ecommerce-local}/agent-api:latest
+    container_name: agent-api
+    profiles: [agent]
+    ports:
+      - "8003:8003"
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-qwen2.5:3b}
+      - AGENT_LLM_BACKEND=${AGENT_LLM_BACKEND:-ollama}
+      - VLLM_URL=http://nginx-vllm:8080/v1
+      - VLLM_MODEL=${VLLM_MODEL:-Qwen/Qwen2.5-7B-Instruct-AWQ}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-dangvantuan/vietnamese-embedding}
+      - KB_LOCAL_PATH=${KB_LOCAL_PATH-/app/kb-docs}
+      - KB_BUCKET=${KB_BUCKET:-warehouse}
+      - KB_QDRANT_COLLECTION=kb_docs
+      - HF_HOME=/tmp/hf_cache
+      - SENTENCE_TRANSFORMERS_HOME=/app/model_cache/sentence_transformers
+      - MLFLOW_TRACKING_URI=file:///tmp/mlruns
+      - GIT_PYTHON_REFRESH=quiet
+      - RECSYS_API_URL=http://recsys-api:8001
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-123}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+      - ITEM_LOOKUP_PATH=/app/artifacts/recsys_models/data_menu/item_lookup.parquet
+      - VECTOR_STORE_BACKEND=${VECTOR_STORE_BACKEND:-qdrant}
+      - QDRANT_URL=http://qdrant:6333
+      - RAG_QDRANT_COLLECTION=rag_items
+      - LLM_TIMEOUT_SECONDS=${LLM_TIMEOUT_SECONDS:-60}
+      - LLM_MAX_RETRIES=${LLM_MAX_RETRIES:-2}
+      - AGENT_SUMMARIZE_AFTER=${AGENT_SUMMARIZE_AFTER:-12}
+      - AGENT_KEEP_RECENT=${AGENT_KEEP_RECENT:-6}
+      # Bắt buộc — /admin/* fail-CLOSED nếu thiếu
+      - ADMIN_API_KEY=${ADMIN_API_KEY:?ADMIN_API_KEY chưa được set trong .env}
+      - IP_RATE_LIMIT_PER_MIN=${IP_RATE_LIMIT_PER_MIN:-60}
+      # Trần chi phí LLM/ngày — rate limit chặn số request, cái này chặn tiền.
+      - USER_DAILY_BUDGET_USD=${USER_DAILY_BUDGET_USD:-0.50}
+      - GLOBAL_DAILY_BUDGET_USD=${GLOBAL_DAILY_BUDGET_USD:-5.00}
+    volumes:
+      - ./artifacts/recsys_models/data_menu:/app/artifacts/recsys_models/data_menu:ro
+      - ./artifacts/kb_index:/app/artifacts/kb_index
+      - ./model_cache/sentence_transformers:/app/model_cache/sentence_transformers
+      - ./model_cache/huggingface:/app/model_cache/huggingface
+      - ./kb-docs:/app/kb-docs:ro
+    depends_on:
+      - recsys-api
+      - nginx-vllm
+    networks:
+      - data-network
+    restart: on-failure
+
+networks:
+  data-network:
+    external: true
+    name: my_shared_network

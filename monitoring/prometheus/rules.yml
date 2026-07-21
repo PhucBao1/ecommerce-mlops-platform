@@ -1,0 +1,195 @@
+groups:
+  - name: recsys_api
+    interval: 30s
+    rules:
+
+      - alert: HighLatencyP95
+        expr: >
+          histogram_quantile(0.95,
+            sum(rate(recommendation_latency_seconds_bucket[5m])) by (le)
+          ) > 0.2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "RecSys API P95 latency > 200ms SLO"
+          description: >
+            P95 recommendation latency is {{ $value | humanizeDuration }}.
+            SLO target: < 200ms. Check Redis cache and Feast availability.
+
+      - alert: HighLatencyP99
+        expr: >
+          histogram_quantile(0.99,
+            sum(rate(recommendation_latency_seconds_bucket[5m])) by (le)
+          ) > 0.5
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "RecSys API P99 latency > 500ms — SLO breach"
+          description: >
+            P99 latency is {{ $value | humanizeDuration }}.
+            Immediate investigation required.
+
+      - alert: CacheHitRateLow
+        expr: >
+          (
+            rate(redis_keyspace_hits_total[5m])
+            /
+            (rate(redis_keyspace_hits_total[5m]) + rate(redis_keyspace_misses_total[5m]))
+          ) < 0.7
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Redis cache hit rate < 70%"
+          description: >
+            Cache hit rate is {{ $value | humanizePercentage }}.
+            High miss rate increases latency and Feast load.
+            Check if Redis memory is full or TTL is too short.
+
+      - alert: HighColdStartRate
+        expr: >
+          rate(cold_start_total[5m])
+          /
+          rate(http_requests_total{job="fastapi-recsys"}[5m])
+          > 0.3
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cold start rate > 30%"
+          description: >
+            {{ $value | humanizePercentage }} of requests are cold starts (trending fallback).
+            Check if new users spike or user history data is missing.
+
+  - name: kafka_pipeline
+    interval: 30s
+    rules:
+
+      - alert: DLQMessageCount
+        expr: kafka_consumer_lag{topic="new_reviews_dlq"} > 0
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: "DLQ has {{ $value }} unprocessed messages"
+          description: >
+            Dead Letter Queue 'new_reviews_dlq' has messages.
+            This means stream processor failed to process some reviews.
+            Review logs: docker logs recsys-consumer
+
+      - alert: KafkaConsumerLagHigh
+        expr: kafka_consumer_lag{topic="new_reviews",group="recsys_streaming_group"} > 1000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Kafka consumer lag > 1000 messages"
+          description: >
+            Consumer group 'recsys_streaming_group' is {{ $value }} messages behind.
+            Real-time personalization may be delayed.
+
+  - name: infrastructure
+    interval: 60s
+    rules:
+
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis is down"
+          description: "Redis instance is not responding. All caching and Feast online features unavailable."
+
+      - alert: HighMemoryUsage
+        expr: >
+          (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes)
+          / node_memory_MemTotal_bytes
+          > 0.9
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Host memory usage > 90%"
+          description: "Memory usage is {{ $value | humanizePercentage }}. Consider adding swap or scaling."
+
+      - alert: ContainerHighCPU
+        expr: >
+          sum(rate(container_cpu_usage_seconds_total{name=~"recsys.*"}[1m])) by (name)
+          > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container {{ $labels.name }} CPU > 80%"
+          description: "Container is using {{ $value | humanizePercentage }} CPU for 5+ minutes."
+
+  - name: agent_api
+    interval: 30s
+    rules:
+
+      - alert: AgentChatP99LatencyTooHigh
+        expr: >
+          histogram_quantile(0.99,
+            sum(rate(llm_latency_seconds_bucket[5m])) by (le, backend)
+          ) > 3
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Agent chat P99 latency > 3s SLO"
+          description: >
+            Backend {{ $labels.backend }} P99 latency is {{ $value | humanizeDuration }}.
+            SLO: < 3s. Check Ollama container health or Claude API quota.
+
+      - alert: AgentChatP95LatencyHigh
+        expr: >
+          histogram_quantile(0.95,
+            sum(rate(llm_latency_seconds_bucket[5m])) by (le, backend)
+          ) > 1.5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent chat P95 latency > 1.5s"
+          description: >
+            Backend {{ $labels.backend }} P95 is {{ $value | humanizeDuration }}.
+            Consider switching AGENT_LLM_BACKEND=claude or scaling Ollama replicas.
+
+      - alert: AgentFallbackRateHigh
+        expr: >
+          sum(rate(agent_fallback_total[5m])) by (tier)
+          /
+          sum(rate(llm_request_total[5m]))
+          > 0.2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent fallback rate > 20% (tier {{ $labels.tier }})"
+          description: >
+            LLM is failing for > 20% of requests and falling back to tier {{ $labels.tier }}.
+            Check Ollama logs or ANTHROPIC_API_KEY validity.
+
+      - alert: GuardrailBlockRateHigh
+        expr: >
+          sum(rate(guardrail_block_total[5m])) by (reason) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Guardrail blocking > 6 req/min ({{ $labels.reason }})"
+          description: >
+            High block rate for reason '{{ $labels.reason }}' — possible prompt injection attack.
+            Investigate: docker logs agent-api | grep guardrail
+
+      - alert: AgentAPIDown
+        expr: up{job="agent-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Agent API is down"
+          description: "agent-api container not responding on :8003. Shopping chat feature unavailable."

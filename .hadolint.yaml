@@ -1,0 +1,6 @@
+ignore:
+  - DL3008  # Pin versions in apt-get — too strict for dev images
+  - DL3013  # Pin pip versions — managed via requirements.txt
+  - DL3015  # No --no-install-recommends — minor
+  - DL3042  # Avoid pip cache — we use BuildKit cache mount
+  - DL3059  # Multiple RUN — intentional layer separation
