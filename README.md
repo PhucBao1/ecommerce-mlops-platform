@@ -22,9 +22,9 @@ LTR ensemble ranks recommendations, FastAPI serves everything, and a hand-built
 real AWS GPU instance**, answers customer questions — all provisioned with
 Terraform and shipped through GitHub Actions CI/CD.
 
-<!-- ảnh demo tổng quan / video walkthrough: sẽ update sau -->
+Live demo recordings: recommendations + product search in [§V](#v-deploy-serving-services-docker-compose), the shopping agent chat in [§VI](#vi-deploy-the-llm-shopping-agent-langgraph--rag--vllm).
 
-![Overall Architecture](docs/architecture/06-overview-clean.png)
+![Overall Architecture](docs/image/Recsys-overall.svg)
 
 **Technology:**
 * Source control: Git/GitHub
@@ -60,124 +60,35 @@ Terraform and shipped through GitHub Actions CI/CD.
 
 ```txt
 ├── src/
-│   ├── crawler/
+│   ├── crawler/                   # Scrapy spider — crawls Tiki products & reviews
 │   ├── data_pipeline/
-│   │   ├── jobs/
-│   │   ├── quality/
+│   │   ├── jobs/                  # Spark ETL — bronze_to_silver.py (clean, dedup, GE quality gate)
+│   │   ├── quality/                # Great Expectations validation suites
 │   │   ├── streaming/
-│   │   │   ├── producer/
-│   │   │   └── consumer/
-│   │   └── spark/
-│   ├── feature_store/
+│   │   │   ├── producer/          # FastAPI — POST /api/v1/reviews → publishes to Kafka
+│   │   │   └── consumer/          # Kafka consumer — sentiment inference, Feast/Iceberg writes, cache invalidation
+│   │   └── spark/                 # Shared SparkSession factory (Iceberg + S3/MinIO)
+│   ├── feature_store/             # Feast feature repo (Redis online, Parquet/Iceberg offline)
 │   ├── ml_models/
-│   │   ├── nlp/
-│   │   └── recsys/
+│   │   ├── nlp/                    # PhoBERT fine-tuning + ONNX export
+│   │   └── recsys/                # Two-Tower, SASRec, XGBoost LTR training + cross-sell mining
 │   └── serving/
-│       ├── nlp_api/
-│       ├── recsys_api/
-│       ├── agent_api/
-│       └── streamlit_app/
-├── dbt_project/
-├── airflow/dags/
-├── terraform/
-├── docker/
-├── monitoring/
-├── kb-docs/
-├── docs/
-├── docker-compose.infra.yml
-├── docker-compose.app.yml
-├── docker-compose.batch_dev.yml
-└── docker-compose.monitor.yml
+│       ├── nlp_api/               # FastAPI — POST /predict (PhoBERT ONNX)
+│       ├── recsys_api/            # FastAPI — POST /recommend, /recommend/session
+│       ├── agent_api/             # LangGraph shopping agent — POST /chat/stream
+│       └── streamlit_app/         # Local demo UI (chat + product search)
+├── dbt_project/                   # Silver → Gold: dims/facts, SCD Type 2 snapshots
+├── airflow/dags/                  # Daily bronze→silver, batch inference, drift/retrain DAGs
+├── terraform/                     # VPC, EC2 (GPU Spot/vLLM), S3, ECR, IAM/OIDC, RDS
+├── docker/                        # Per-service Dockerfiles
+├── monitoring/                    # Prometheus config + Grafana dashboards
+├── kb-docs/                       # Policy documents backing agent RAG
+├── docs/                          # Architecture diagrams + real screenshots
+├── docker-compose.infra.yml       # Kafka, Spark, Iceberg, Postgres, Redis
+├── docker-compose.app.yml         # FastAPI services + agent [profile]
+├── docker-compose.batch_dev.yml   # Airflow
+└── docker-compose.monitor.yml     # Prometheus + Grafana
 ```
-
-**`src/crawler/`** — Scrapy spider that crawls Tiki product pages and reviews.
-Handles pagination, retry/backoff, and normalizes raw HTML into structured
-records before they ever touch the pipeline.
-
-**`src/data_pipeline/jobs/`** — Spark batch jobs, most importantly
-`bronze_to_silver.py`: text cleaning, deduplication, and a Great Expectations
-quality gate before writing to Apache Iceberg (ACID transactions, time travel,
-schema evolution).
-
-**`src/data_pipeline/quality/`** — Great Expectations suites that validate
-schema, null rates, and value ranges before data is allowed to move from Bronze
-to Silver.
-
-**`src/data_pipeline/streaming/producer/`** — FastAPI service exposing
-`POST /api/v1/reviews`; accepts a new review/purchase event and publishes it to
-Kafka. Deliberately does no heavy processing itself, so the caller gets a fast
-response regardless of downstream load.
-
-**`src/data_pipeline/streaming/consumer/`** — Kafka consumer that does the
-actual work triggered by a new event: runs NLP sentiment inference, writes
-updated features to Feast, writes to Iceberg, and invalidates the relevant
-Redis cache entries. Runs as its own container so a slow NLP model never blocks
-the producer's response path.
-
-**`src/data_pipeline/spark/`** — Shared `SparkSession` factory wired for the
-Iceberg catalog and S3 (or MinIO locally), reused by every Spark job so
-connection/catalog config lives in exactly one place.
-
-**`src/feature_store/`** — Feast feature repository: entity and feature-view
-definitions (e.g. `recent_sentiment_score`, `last_commented_product_id`), Redis
-as the online store, Parquet/Iceberg as the offline store.
-
-**`src/ml_models/nlp/`** — PhoBERT fine-tuning code: 3-class sentiment
-(Negative/Neutral/Positive) with class-weighted loss for imbalanced review
-data, plus the ONNX export script used to speed up production inference.
-
-**`src/ml_models/recsys/`** — All recommendation model training: Two-Tower
-(retrieval), SASRec (session-based), XGBoost LTR (reranking), Optuna
-hyperparameter search, MLflow experiment logging, and the market-basket/lift
-analysis script that mines category cross-sell pairs from real purchase
-history.
-
-**`src/serving/nlp_api/`** — FastAPI wrapping the PhoBERT ONNX model, exposing
-`POST /predict` for sentiment scoring.
-
-**`src/serving/recsys_api/`** — FastAPI recommendation service, `POST
-/recommend` and `POST /recommend/session`. Owns the full ranking flow: Redis
-cache → Feast online features → Two-Tower/LightGCN retrieval → ensemble
-rerank → top-K with explanation.
-
-**`src/serving/agent_api/`** — The LangGraph shopping agent: hand-built
-`StateGraph`, Router node, RAG pipeline over `kb-docs/`, tool-calling for
-product questions, streaming via `POST /chat/stream`. Also owns the
-LiteLLM/vLLM judge integration used for evaluation.
-
-**`src/serving/streamlit_app/`** — A small Streamlit UI for manually
-demoing the chat agent and product search against the running APIs; run
-locally, not part of the Docker Compose stack.
-
-**`dbt_project/`** — Silver → Gold transformations: dimension/fact tables,
-SCD Type 2 snapshots, and mart models, run against the Iceberg tables via the
-Spark adapter.
-
-**`airflow/dags/`** — The orchestration DAGs: daily bronze→silver, ML batch
-inference, the dbt run chain, drift checking, and conditional retraining.
-
-**`terraform/`** — Infrastructure as code for the AWS deployment: VPC, EC2 (GPU
-Spot instance running vLLM), S3 (Iceberg lakehouse), ECR repositories, IAM/OIDC
-role for GitHub Actions, RDS, and Secrets Manager.
-
-**`docker/`** — One Dockerfile per service, kept close to that service's own
-requirements rather than one shared mega-image.
-
-**`monitoring/`** — Prometheus scrape config and Grafana dashboard
-provisioning (JSON dashboards + datasource config), version-controlled instead
-of clicked together in the UI.
-
-**`kb-docs/`** — The raw policy documents (returns, warranty, shipping) that
-back the agent's RAG knowledge base.
-
-**`docs/`** — Architecture diagrams and real screenshots referenced throughout
-this README.
-
-**Docker Compose files** — split by concern rather than one giant file:
-`docker-compose.infra.yml` (Kafka, Spark, Iceberg, Postgres, Redis),
-`docker-compose.app.yml` (the FastAPI services + agent, profile-gated),
-`docker-compose.batch_dev.yml` (Airflow), `docker-compose.monitor.yml`
-(Prometheus + Grafana) — so a given environment only brings up what it needs.
 
 ---
 
@@ -264,7 +175,8 @@ python -m src.ml_models.recsys.training.build_category_complements
 MLflow tracks every run (metrics + model registry + artifacts); Optuna handles
 hyperparameter search (`tune_optuna.py`).
 
-<!-- ảnh MLflow experiment tracking UI: sẽ update sau -->
+![MLflow run — LTR LambdaMART, real params + metrics](docs/image/mlflow_1.png)
+![MLflow run — model metrics charts](docs/image/mlflow_2.png)
 
 ---
 
@@ -303,7 +215,7 @@ RECSYS_URL=http://localhost:8001 AGENT_URL=http://localhost:8003 \
   streamlit run src/serving/streamlit_app/app.py
 ```
 
-<!-- ảnh Streamlit UI đang chat + search: sẽ update sau -->
+![Streamlit demo — recommendations + product search](docs/image/recsys_demo.gif)
 
 ---
 
@@ -326,7 +238,7 @@ AGENT_LLM_BACKEND=vllm VLLM_URL=http://<vllm-host>:8000/v1 \
 curl -X POST http://localhost:8003/admin/kb/reindex     # build RAG index
 curl -X POST http://localhost:8003/chat/stream \
   -H "Content-Type: application/json" \
-  -d '{"customer_id": "2083331", "message": "Tui mún hoàn trả thì làm sao"}'
+  -d '{"customer_id": "2083331", "message": "Tôi mún hoàn trả thì làm sao"}'
 ```
 
 | Tool | Purpose |
@@ -344,7 +256,7 @@ Sentence-Transformers embeddings → FAISS `IndexFlatIP` → cross-encoder reran
 questions by keyword and routes straight to a `kb_search` node, guaranteeing
 grounded answers instead of risking a skipped tool call.
 
-<!-- ảnh agent chat demo (curl /chat/stream hoặc UI Streamlit): sẽ update sau -->
+![LLM shopping agent demo — RAG + tool-calling chat](docs/image/agent_demo.gif)
 
 ---
 
@@ -370,7 +282,8 @@ capacity is unavailable.
 ![S3 gold/ — dbt mart tables written to S3](docs/image/AWS_S3_3.png)
 *Real Gold-layer tables materialized by dbt, physically stored in S3.*
 
-<!-- ảnh EC2 instance running + ECR repo có image: sẽ update sau -->
+![AWS EC2 — instance running](docs/image/AWS_EC2.png)
+![AWS ECR — pushed image repositories](docs/image/AWS_ECR.png)
 
 ---
 
@@ -386,7 +299,7 @@ No SSH keys or static AWS credentials are stored in GitHub Secrets — the
 workflow assumes an IAM role via **OIDC federation**, and the deploy step runs
 remotely through **AWS SSM** Run Command.
 
-<!-- ảnh GitHub Actions run xanh: sẽ update sau -->
+![GitHub Actions — full green run: build, scan, push ECR, deploy EC2](docs/image/CI_CD.png)
 
 ---
 
@@ -410,7 +323,11 @@ rate(recommendation_latency_seconds_count{source="redis_cache"}[5m])
 Every request carries a `trace_id`; Jaeger shows the distributed trace across
 API → Feast → FAISS → Redis → Kafka.
 
-<!-- ảnh Grafana dashboard + Jaeger trace: sẽ update sau -->
+![Grafana — RecSys SLO/overview: RPS, P95 latency, error rate](docs/image/Grafana_recsys_1.png)
+![Grafana — RecSys stage breakdown + Redis cache hit rate](docs/image/Grafana_recsys_2.png)
+![Grafana — Data pipeline: Kafka lag, DLQ, Redis ops, E2E freshness](docs/image/Grafana_datapipeline.png)
+![Grafana — GPU/vLLM: utilization, VRAM, requests running/waiting, TTFT](docs/image/Grafana_vLLM_1.png)
+![Grafana — GPU/vLLM: generation throughput, decode speed, prefix cache hit rate](docs/image/Grafana_vLLM_2.png)
 
 ---
 
